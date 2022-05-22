@@ -8,6 +8,7 @@
 React 18.1.0
 Styled-components
 Context Api
+GraphQL
 
 #Setup
  
@@ -16,7 +17,9 @@ To run this project:
 
 1- Clone and run endpoint: https://github.com/scandiweb/junior-react-endpoint
 
-2- $ npm i $ npm start
+2- npm i 
+
+3- npm start
 
 
 
