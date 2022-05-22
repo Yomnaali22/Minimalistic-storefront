@@ -3,14 +3,14 @@
 - Product page
 - Cart page and mini cart
 
-#Technologies:
+# Technologies:
 
 - React 18.1.0
 - Styled-components
 - Context Api
 - GraphQL
 
-#Setup
+# Setup
  
  
 To run this project:
