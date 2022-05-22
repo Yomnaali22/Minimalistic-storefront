@@ -1,4 +1,4 @@
-# e-commerce website
+# Minimalistic storefront
 - Category page 
 - Product page
 - Cart page and mini cart
