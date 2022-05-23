@@ -36,7 +36,7 @@ export default class Navigation extends Component {
 
   render() {
     const { categoriesNames, dropdown, open } = this.state;
-    const { setOverlay, isOpen } = this.props;
+    const { setOverlay, isopen } = this.props;
     const currencies = this.props.currencies;
     const setCurrency = this.props.setCurrency;
     // Selected currency index
@@ -76,7 +76,7 @@ export default class Navigation extends Component {
             );
           })
         }
-        <LogoContainer isOpen={!isOpen} dropdown={!dropdown}>
+        <LogoContainer isOpen={!isopen} dropdown={!dropdown}>
           <p
             aria-expanded={dropdown ? "true" : "false"}
             onClick={() => {
@@ -102,14 +102,10 @@ export default class Navigation extends Component {
               />
             ) : null}
           </div>
-          <img
-            src={CartIcon}
-            isOpen={isOpen}
-            onClick={() => setOverlay(!isOpen)}
-          />
+          <img src={CartIcon} onClick={() => setOverlay(!isopen)} />
           {
             // Show Overlay
-            isOpen && <CartOverlay className="overlay" isOpen={isOpen} />
+            isopen && <CartOverlay className="overlay" isopen={isopen} />
           }
         </LogoContainer>
         <Outlet />

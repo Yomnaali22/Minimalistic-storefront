@@ -4,8 +4,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px;
-  gap: 0px;
+  padding: 0px;
+  gap: 40px;
 `;
 
 export const ProductWrapper = styled.div`
@@ -14,31 +14,28 @@ export const ProductWrapper = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-  width: 293px;
-  height: 190px;
+  width: 400px;
+  height: 350px;
   img {
     width: 121px;
-    height: 160px;
+    height: 200px;
   }
-`;
+  .button {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    margin-right: 2px;
+    width: 50px;
+    background-color: red;
+    button {
+      background-color: white;
+      border: 1px solid black;
+      height: 30px;
 
-export const Content = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 4px;
-  width: 164px;
-  height: 190px;
-`;
-
-export const Button = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 120px;
-  button {
-    background-color: white;
+      text {
+        text-align: center;
+      }
+    }
   }
 `;
 
@@ -47,13 +44,16 @@ export const Text = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 8px;
-  p {
-    font-family: "Raleway";
-    font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 160%;
-    color: #1d1f22;
+  gap: 10px;
+  width: 340px;
+  height: 350px;
+  background-color: green;
+  .brand,
+  .name,
+  .price {
+    margin-bottom: 10px;
+  }
+  .attributes {
+    display: inline-block;
   }
 `;

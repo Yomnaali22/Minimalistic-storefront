@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const Content = styled.p`
+export const Content = styled.div`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 19px;
   line-height: 18px;
 `;

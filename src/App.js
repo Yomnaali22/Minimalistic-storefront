@@ -16,7 +16,7 @@ export default class App extends Component {
     categories: [],
     currencies: [],
     product: {},
-    isOpen: false,
+    isopen: false,
     selectedCurrency: localStorage.getItem("currency") || 0,
     SelectedProducts:
       JSON.parse(localStorage.getItem("SelectedProducts")) || [],
@@ -68,12 +68,12 @@ export default class App extends Component {
   // Overlay of the mini cart
   setOverlay(boolean) {
     this.setState({
-      isOpen: boolean,
+      isopen: boolean,
     });
   }
 
   render() {
-    const { categories, currencies, product, SelectedProducts, isOpen } =
+    const { categories, currencies, product, SelectedProducts, isopen } =
       this.state;
     return (
       <Wrapper>
@@ -84,6 +84,7 @@ export default class App extends Component {
             SelectedProducts: SelectedProducts,
             categories: categories[0],
             setOverlay: this.setOverlay.bind(this),
+            isopen: isopen,
           }}
         >
           <Routes>
@@ -94,7 +95,7 @@ export default class App extends Component {
                   currencies={currencies}
                   setCurrency={this.setCurrency.bind(this)}
                   setOverlay={this.setOverlay.bind(this)}
-                  isOpen={isOpen}
+                  isopen={isopen}
                 />
               }
             >

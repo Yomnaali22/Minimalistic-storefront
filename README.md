@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# Minimalistic storefront
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Category page
+- Product page
+- Cart page and mini cart
 
-## Available Scripts
+## Technologies:
 
-In the project directory, you can run:
+- React 18.1.0
+- Styled-components
+- Context Api
+- GraphQL
 
-### `npm start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run this project:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1- Clone and run endpoint: https://github.com/scandiweb/junior-react-endpoint
 
-### `npm test`
+2- npm i
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3- npm start
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![My Remote Image](https://lh3.googleusercontent.com/8Q3uf4wTyW9yn6oKwBGsd-njM0i0Ytlcj_Ry6pN2t3nG_xr-ctk5KbxPzjV1m54pkcpveEaMukorZerPhg3pRRrKncDIHTDzK3CzdTc7Epc6diZIb0c47FbjRoMbCg4oBf_J7Wl2InRyaTAxQb9FHYFwTH1D2O9_rauEOhaV7twm42zGKLfLBIxqlssVqi3PHDoc2kYx-4ElqQv9o9vq1fBg6rOlR-FTt0pAiU0c9vTQWnnia4XL2IMuVsTxI1b_GUzHDqhVW-zPKi1fYdDN3tJNwFdyYLDmUl9-DY1D4UIIwpXFCGVTlPG5fE4XEmTNTWni3OQN2m2DcV0zKuXmhshYS36fPL9EQ7IYtwkM7kUqFavfyFTncTXoR4mjQ91Js2tyAzLWvUKm3fJTsu3SXuFQuU0fFlIfwmfXp0ODf01NLe9xYz96jPs1kFPOYlPJ9I7myk_9N6ZOhzgnrtOcQoPtKnnb0A7XRcNW7V_26ZF-edNcZT1IGKFrkTZ7-rOV90Vhz3deb-7ouF-DVqn715pmoTLuFkByCDveCCXR-j5iSrOwi4RBeI7DDwd1ffe5Ake6sDy9DUVb51c96u3iQHBjdsbzpx5vys_BPnokWcKSHELqWDjMooTfldz3xIw3d5v4wXb6_6nehdF5F96zxHFaLiza-vyjTOuvbCbWYAKD7jm9IEU-9OIAVtK8Yq48ZAe55eRqy-OjGmTdMKR-ZGSGyCj9TZ27A8wH9-zYlFAP7aSsJwjibL0yyTfnS3ZR8QBD9IFpb2RHfdxtYONOPc8y7Gw_=w2878-h1638-no?authuser=0)

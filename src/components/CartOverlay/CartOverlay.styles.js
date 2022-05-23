@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 export const Overlay = styled.div`
-  position: ${(props) => props.isOpen && "fixed"};
-  display: ${(props) => props.isOpen && "block"};
+  position: ${(props) => props.isopen && "fixed"};
+  display: ${(props) => props.isopen && "block"};
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin-top: 83px;
-  background-color: ${(props) => props.isOpen && "rgba(0, 0, 0, 0.4)"};
-  z-index: ${(props) => props.isOpen && "2"};
-  cursor: ${(props) => props.isOpen && "2"};
+  height: 100%;
+  background-color: ${(props) => props.isopen && "rgba(0, 0, 0, 0.4)"};
+  z-index: ${(props) => props.isopen && "2"};
+  cursor: ${(props) => props.isopen && "2"};
 `;
-
 export const Cart = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,12 +21,11 @@ export const Cart = styled.div`
   padding: 32px 16px;
   gap: 32px;
   position: absolute;
-  width: 325px;
-  height: 677px;
-  left: 1479px;
+  width: 450px;
+  left: 1300px;
   top: 0px;
-  background: #ffffff;
-
+  height: 677px;
+  background: white;
   p {
     position: absolute;
     top: 6px;
@@ -38,5 +37,65 @@ export const Cart = styled.div`
     font-weight: 700;
     font-size: 16px;
     text-align: right;
+  }
+  div {
+    overflow-y: scroll;
+  }
+
+  div::-webkit-scrollbar {
+    display: none;
+  }
+  div {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 12px;
+    width: 292px;
+    height: 110px;
+    button {
+      background-color: var(--primaryWhite);
+      width: 140px;
+      height: 43px;
+      border: 1px solid black text {
+        width: 68px;
+        height: 17px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 120%;
+        text-align: center;
+        text-transform: uppercase;
+        color: var(--primaryBlack);
+      }
+    }
+    button:focus {
+      background: #5ece7b;
+    }
+  }
+
+  .totalPrice {
+    width: 289px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+    text {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .total {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 18px;
+    }
   }
 `;

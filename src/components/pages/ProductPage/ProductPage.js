@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Interweave } from "interweave";
 import API from "../../../api";
+import Context from "../../../context/context";
 // Query
 import { productQuery } from "../../../Queries";
 // Styles
@@ -10,11 +11,12 @@ import CurrencySwitcher from "../../CurrencySwitcher/CurrencySwitcher";
 import ProductAttributes from "../../ProductAttributes/ProductAttributes";
 
 export default class ProductPage extends Component {
+  static contextType = Context;
   state = {
     increaseAmountOfProduct: localStorage.getItem("amount"),
     product: {
       SelectedAttributes:
-        JSON.parse(localStorage.getItem("SelectedAttributes")) || [],
+        [] || JSON.parse(localStorage.getItem("SelectedAttributes")),
     },
   };
 
@@ -42,6 +44,22 @@ export default class ProductPage extends Component {
   }
   render() {
     const { product, setSelectedProducts } = this.props;
+    // All currencies
+    const { currencies } = this.context;
+
+    // Product prices
+    const prices = product.prices;
+    // Selected Currency index
+    const index = JSON.parse(localStorage.getItem("currency"));
+
+    // Find and return the amount and symbol that matchs the chosen currency
+    const productPrice =
+      prices &&
+      currencies.length &&
+      prices.find(
+        (price) => index && price.currency.label === currencies[index].label
+      );
+
     const setWantToBuyProducts = (theproduct) => {
       const products = JSON.parse(localStorage.getItem("SelectedProducts"))
         ? JSON.parse(localStorage.getItem("SelectedProducts"))
@@ -52,14 +70,17 @@ export default class ProductPage extends Component {
         0
       );
 
-      if (!count) {
+      const a = JSON.parse(localStorage.getItem("SelectedAttributes"));
+      const n = a && a.some((pro) => pro.id === product.id);
+
+      if (!count && n) {
         products.push({
           name: product.name,
           brand: product.brand,
           id: product.id,
           gallery: product.gallery[0],
-          selectedAttributes: this.state.product.selectedAttributes,
-          count: count,
+          selectedAttributes: a && a,
+          productPrice,
         });
       }
       setSelectedProducts(products);
@@ -74,7 +95,6 @@ export default class ProductPage extends Component {
       }));
     };
 
-    console.log(product.id);
     return (
       !product.length && (
         <Wrapper>

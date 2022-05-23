@@ -4,7 +4,8 @@ import { Swatch } from "./ProductAttributes.styles";
 
 export default class ProductAttributes extends Component {
   render() {
-    const { product, item, setAttributes, type, attributeName } = this.props;
+    const { product, item, setAttributes, type, attributeName, className } =
+      this.props;
     // Selected attributes of all products
     const productsSelectedAttributes = JSON.parse(
       localStorage.getItem("SelectedAttributes")
@@ -45,7 +46,6 @@ export default class ProductAttributes extends Component {
       }
       setAttributes(productsSelectedAttributes);
     };
-    // true if attribute matches selected attribute
     const selectedAttribute = productAttribute
       ? item.displayValue === productAttribute[attributeName] &&
         product.id === productAttribute.id
@@ -56,12 +56,13 @@ export default class ProductAttributes extends Component {
           selectedAttribute: selectedAttribute,
           color: item.value,
           type: type,
+          className: className,
         }}
         onClick={() => setSelectedAttributes(item)}
       >
         {
           <div>
-            <p> {type === "text" && item.value}</p>
+            <text> {type === "text" && item.value} </text>
           </div>
         }
       </Swatch>
