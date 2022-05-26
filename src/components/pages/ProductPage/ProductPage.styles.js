@@ -15,8 +15,8 @@ export const Img = styled.img`
   width: ${(props) => {
     return props.productId === "jacket-canada-goosee" ||
       props.productId === "huarache-x-stussy-le"
-      ? "600px"
-      : "900px";
+      ? "550px"
+      : "800px";
   }};
 `;
 
@@ -29,7 +29,7 @@ export const Gallery = styled.div`
   img {
     position: relative;
     width: 120px;
-    height: 145px;
+    height: 139px;
     top: 80px;
   }
 `;
@@ -38,9 +38,12 @@ export const Content = styled.div`
   position: absolute;
   width: 550px;
   height: 595px;
-  left: 955px;
   top: 200px;
-
+  left: ${(props) =>
+    props.productId === "jacket-canada-goosee" ||
+    props.productId === "huarache-x-stussy-le"
+      ? "970px"
+      : "1100px"};
   .brandName {
     font-family: "Raleway";
     font-style: normal;
@@ -62,8 +65,11 @@ export const Content = styled.div`
     font-family: "Roboto Condensed";
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 18px;
+  }
+  .attributeName {
+    text-transform: uppercase;
   }
   button {
     background-color: #5ece7b;
@@ -78,15 +84,14 @@ export const Content = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 120%;
+    margin-top: 30px;
     border: none;
   }
   .description {
-    bottom: 178px;
     font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 159.96%;
-    padding: 10px;
+    margin-top: 50px;
   }
 `;

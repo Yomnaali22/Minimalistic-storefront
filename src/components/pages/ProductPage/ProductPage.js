@@ -20,6 +20,7 @@ export default class ProductPage extends Component {
     },
   };
 
+  // Get the product data
   async componentDidMount() {
     try {
       const product = await API.getProduct(
@@ -32,6 +33,7 @@ export default class ProductPage extends Component {
     }
   }
 
+  // Set the attributes of the product
   setAttributes(productsColors) {
     this.setState({
       product: {
@@ -42,11 +44,11 @@ export default class ProductPage extends Component {
       },
     });
   }
+
   render() {
     const { product, setSelectedProducts } = this.props;
     // All currencies
     const { currencies } = this.context;
-
     // Product prices
     const prices = product.prices;
     // Selected Currency index
@@ -60,41 +62,62 @@ export default class ProductPage extends Component {
         (price) => index && price.currency.label === currencies[index].label
       );
 
-    const setWantToBuyProducts = (theproduct) => {
-      const products = JSON.parse(localStorage.getItem("SelectedProducts"))
+    /**
+     * Add products to cart
+     */
+    const WantToBuyProducts = (product) => {
+      // Want to buy products
+      const selectedProducts = JSON.parse(
+        localStorage.getItem("SelectedProducts")
+      )
         ? JSON.parse(localStorage.getItem("SelectedProducts"))
         : [];
-      const count = products.reduce(
+      // Count the occurance of an Object
+      const count = selectedProducts.reduce(
         (initialValue, currentProduct) =>
-          currentProduct.id === theproduct.id ? ++initialValue : initialValue,
+          currentProduct.id === product.id ? ++initialValue : initialValue,
         0
       );
+      // All Selected Attributes of selected Products
+      const selectedAttributes = JSON.parse(
+        localStorage.getItem("SelectedAttributes")
+      );
+      // Check if the product we're adding the cart has attributes set
+      const productSelectedAttribute =
+        selectedAttributes &&
+        selectedAttributes.some((pro) => pro.id === product.id);
 
-      const a = JSON.parse(localStorage.getItem("SelectedAttributes"));
-      const n = a && a.some((pro) => pro.id === product.id);
-
-      if (!count && n) {
-        products.push({
+      // Don't add product to cart unless the product doesn't exist and has chosen attributes
+      if (!count && productSelectedAttribute) {
+        selectedProducts.push({
           name: product.name,
           brand: product.brand,
           id: product.id,
           gallery: product.gallery[0],
-          selectedAttributes: a && a,
-          productPrice,
+          selectedAttributes: selectedAttributes && selectedAttributes,
+          productPrice:
+            index === 0 || index === null
+              ? product.prices[0].amount
+              : productPrice,
+          productAmount: 1,
         });
+        setSelectedProducts(selectedProducts);
+        // If the product has no attributes
+      } else if (!count && product.attributes.length === 0) {
+        selectedProducts.push({
+          name: product.name,
+          brand: product.brand,
+          id: product.id,
+          gallery: product.gallery[0],
+          productPrice:
+            index === 0 || index === null
+              ? product.prices[0].amount
+              : productPrice,
+          productAmount: 1,
+        });
+        setSelectedProducts(selectedProducts);
       }
-      setSelectedProducts(products);
     };
-
-    const setAmount = () => {
-      this.setState((prevState) => ({
-        increaseAmountOfProduct: localStorage.setItem(
-          "amount",
-          Number(++prevState)
-        ),
-      }));
-    };
-
     return (
       !product.length && (
         <Wrapper>
@@ -114,7 +137,7 @@ export default class ProductPage extends Component {
                 })
             }
           </Gallery>
-          <Content>
+          <Content productId={product.id}>
             <h1 className="brandName">{product.brand}</h1>
             <h3 className="productName">{product.name}</h3>
             {product.attributes &&
@@ -137,12 +160,12 @@ export default class ProductPage extends Component {
                   </React.Fragment>
                 );
               })}
-            <p>Price: </p>
+            <p className="attributeName">Price: </p>
             <CurrencySwitcher product={product} />
             <button
               onClick={() => {
-                setAmount();
-                setWantToBuyProducts(product);
+                // Put only available products in cart
+                product.inStock && WantToBuyProducts(product);
               }}
             >
               Add To Cart

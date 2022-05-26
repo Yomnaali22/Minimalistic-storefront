@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // Styles
-import { Swatch } from "./ProductAttributes.styles";
+import { Swatch, Text } from "./ProductAttributes.styles";
 
 export default class ProductAttributes extends Component {
   render() {
@@ -61,9 +61,13 @@ export default class ProductAttributes extends Component {
         onClick={() => setSelectedAttributes(item)}
       >
         {
-          <div>
-            <text> {type === "text" && item.value} </text>
-          </div>
+          <Text
+            color={{
+              className: className,
+            }}
+          >
+            {type === "text" && item.value}
+          </Text>
         }
       </Swatch>
     );

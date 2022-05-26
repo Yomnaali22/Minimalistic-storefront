@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
+  padding: 20px;
   gap: 40px;
 `;
 
@@ -12,13 +12,10 @@ export const ProductWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 400px;
-  height: 350px;
+  width: 415px;
   img {
-    width: 121px;
-    height: 200px;
+    width: 199px;
+    height: 220px;
   }
   .button {
     display: flex;
@@ -26,12 +23,10 @@ export const ProductWrapper = styled.div`
     gap: 70px;
     margin-right: 2px;
     width: 50px;
-    background-color: red;
     button {
       background-color: white;
       border: 1px solid black;
       height: 30px;
-
       text {
         text-align: center;
       }
@@ -46,8 +41,7 @@ export const Text = styled.div`
   padding: 0px;
   gap: 10px;
   width: 340px;
-  height: 350px;
-  background-color: green;
+  height: 200px;
   .brand,
   .name,
   .price {

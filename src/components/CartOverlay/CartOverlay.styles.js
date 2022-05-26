@@ -19,24 +19,30 @@ export const Cart = styled.div`
   justify-content: center;
   align-items: center;
   padding: 32px 16px;
-  gap: 32px;
+  gap: 30px;
   position: absolute;
   width: 450px;
   left: 1300px;
   top: 0px;
-  height: 677px;
+  height: 650px;
   background: white;
-  p {
+  .emptyCartText {
     position: absolute;
-    top: 6px;
-    left: 10px;
-    width: 118px;
-    height: 26px;
-    font-family: "Raleway";
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
-    text-align: right;
+    font-size: 17px;
+    top: 50px;
+    right: 200px;
+  }
+  p {
+    position: relative;
+    right: 135px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    .items {
+      font-weight: 500;
+    }
   }
   div {
     overflow-y: scroll;
@@ -75,23 +81,22 @@ export const Cart = styled.div`
     }
     button:focus {
       background: #5ece7b;
+      border: none;
     }
   }
 
   .totalPrice {
-    width: 289px;
+    width: 359px;
     height: 50px;
     display: flex;
     flex-direction: row;
     gap: 200px;
     text {
-      font-family: "Raleway";
       font-style: normal;
       font-weight: 700;
       font-size: 16px;
     }
     .total {
-      font-family: "Roboto";
       font-style: normal;
       font-weight: 500;
       font-size: 16px;

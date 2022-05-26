@@ -8,24 +8,62 @@ import SelectedProduct from "../SelectedProduct/SelectedProduct";
 export default class CartOverlay extends Component {
   static contextType = Context;
   render() {
-    const { isopen } = this.props;
+    const { currencies } = this.context;
+    // All selected Products
     const selectedProducts =
       JSON.parse(localStorage.getItem("SelectedProducts")) &&
       JSON.parse(localStorage.getItem("SelectedProducts"));
+
+    // Selected Currency
+    const currencyIndex = localStorage.getItem("currency");
+    const { isopen } = this.props;
+
+    // Selected Currency symbol
+    const symbol =
+      currencies[currencyIndex] && currencies[currencyIndex].symbol;
+
+    // All selected attributes
     const selectedAttributes = JSON.parse(
       localStorage.getItem("SelectedAttributes")
     );
 
-    const pr =
+    // Only Return an array of the selected Products prices
+    const productPrices =
       selectedProducts &&
-      selectedProducts.map((pro) => pro.productPrice.amount);
-    const amount = pr.reduce((i, c) => i + c);
+      selectedProducts.map((product) => {
+        return product.productPrice;
+      });
+    // Sum of all prices
+    const totalPrice =
+      productPrices &&
+      productPrices.reduce((prev, curr) => {
+        return prev + curr;
+      }, 0);
 
+    const amount =
+      selectedProducts &&
+      selectedProducts.map((product) => {
+        return product.productAmount;
+      });
+
+    const cartItemsAmount =
+      amount &&
+      amount.reduce((prev, curr) => {
+        return prev + curr;
+      }, 0);
+
+    // Save sum in local storage
+    localStorage.setItem("totalPrice", totalPrice);
     return (
       <Overlay isopen={isopen}>
         <Cart>
-          {(!selectedProducts && <p>Cart is empty!</p>) || (
-            <p>My Bag, {selectedProducts.length} items</p>
+          {(!selectedProducts && selectedProducts.length && (
+            <p className="emptyCartText">Cart is empty!</p>
+          )) || (
+            <p>
+              My Bag, {cartItemsAmount}
+              <span className="items"> items</span>
+            </p>
           )}
           <div>
             {selectedProducts &&
@@ -41,22 +79,28 @@ export default class CartOverlay extends Component {
                 }
               )}
           </div>
-          {selectedProducts && selectedAttributes && (
-            <div className="totalPrice">
-              <text className="total">Total: </text>
-              <text>{amount}</text>
-            </div>
-          )}
-          {selectedProducts && selectedAttributes && (
-            <div className="buttons">
-              <button>
-                <text>View Bag</text>
-              </button>
-              <button>
-                <text>Check out</text>
-              </button>
-            </div>
-          )}
+          {
+            // Check if SelectedArray isn't empty and product has attributes
+            selectedProducts && selectedProducts.length ? (
+              <div className="totalPrice">
+                <span className="total">Total: </span>
+                <span>{`${symbol || "$"}${totalPrice}`}</span>
+              </div>
+            ) : null
+          }
+          {
+            // Check if SelectedArray isn't empty and product has attributes
+            selectedProducts && selectedProducts.length ? (
+              <div className="buttons">
+                <button>
+                  <span>View Bag</span>
+                </button>
+                <button>
+                  <span>Check out</span>
+                </button>
+              </div>
+            ) : null
+          }
         </Cart>
       </Overlay>
     );

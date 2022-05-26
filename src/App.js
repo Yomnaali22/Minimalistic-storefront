@@ -37,6 +37,12 @@ export default class App extends Component {
     } catch (error) {
       console.log("error", error);
     }
+    window.addEventListener("scroll", () => {
+      if (this.state.isopen)
+        this.setState({
+          isopen: false,
+        });
+    });
   }
 
   // Product
@@ -75,8 +81,9 @@ export default class App extends Component {
   render() {
     const { categories, currencies, product, SelectedProducts, isopen } =
       this.state;
+    console.log(isopen);
     return (
-      <Wrapper>
+      <Wrapper isopen={isopen}>
         <Context.Provider
           value={{
             currencies: currencies,
@@ -85,6 +92,7 @@ export default class App extends Component {
             categories: categories[0],
             setOverlay: this.setOverlay.bind(this),
             isopen: isopen,
+            setSelectedProducts: this.setSelectedProducts.bind(this),
           }}
         >
           <Routes>

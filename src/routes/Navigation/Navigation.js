@@ -33,7 +33,6 @@ export default class Navigation extends Component {
       localStorage.setItem("categoryIndex", 0);
     }
   }
-
   render() {
     const { categoriesNames, dropdown, open } = this.state;
     const { setOverlay, isopen } = this.props;

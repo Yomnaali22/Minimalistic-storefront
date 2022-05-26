@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Context from "../../context/context";
+// Styles
 import { Content } from "./CurrencySwitcher.styles";
 
 export default class CurrencySwitcher extends Component {
@@ -8,12 +9,10 @@ export default class CurrencySwitcher extends Component {
     // All currencies
     const { currencies } = this.context;
     const { product } = this.props;
-
     // Product prices
     const prices = product.prices;
     // Selected Currency index
     const index = JSON.parse(localStorage.getItem("currency"));
-
     // Find and return the amount and symbol that matchs the chosen currency
     const productPrice =
       prices &&
@@ -21,12 +20,27 @@ export default class CurrencySwitcher extends Component {
       prices.find(
         (price) => index && price.currency.label === currencies[index].label
       );
+    const selectedProducts = JSON.parse(
+      localStorage.getItem("SelectedProducts")
+    );
+    JSON.parse(localStorage.getItem("SelectedProducts")) &&
+      selectedProducts.forEach((theproduct) => {
+        if (theproduct.id === product.id && index == false) {
+          theproduct.productPrice = prices[0].amount;
+        } else if (theproduct.id === product.id && index) {
+          theproduct.productPrice = productPrice.amount;
+        }
+      });
+    localStorage.setItem("SelectedProducts", JSON.stringify(selectedProducts));
+    // Total price of all selected products "Want to buy products"
+    const defaultPrice =
+      selectedProducts && selectedProducts.find((pro) => pro.id === product.id);
 
     return productPrice ? (
       <Content>
         {
           // The chosen currency
-          `${productPrice.currency.symbol} ${productPrice.amount}`
+          `${productPrice.currency.symbol}${productPrice.amount}`
         }
       </Content>
     ) : (
