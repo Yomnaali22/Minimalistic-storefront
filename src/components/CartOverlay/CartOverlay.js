@@ -62,5 +62,3 @@ export default class CartOverlay extends Component {
     );
   }
 }
-//TODO: styling the text "my bag 4 items text"
-//TODO: Increase amount of each product
