@@ -10,6 +10,7 @@ import { currenciesQuery, categoriesQuery } from "./Queries";
 import Navigation from "./routes/Navigation/Navigation";
 import CategoryPage from "./components/pages/CategoryPage/CategoryPage";
 import ProductPage from "./components/pages/ProductPage/ProductPage";
+import CartPage from "./components/pages/CartPage/CartPage";
 
 export default class App extends Component {
   state = {
@@ -107,6 +108,7 @@ export default class App extends Component {
                 />
               }
             >
+              <Route path={"/cart"} element={<CartPage />} />
               <Route
                 path={`/${localStorage.getItem("id")}`}
                 element={
