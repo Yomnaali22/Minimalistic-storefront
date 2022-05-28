@@ -4,12 +4,12 @@ import Context from "../../context/context";
 import { Cart, Overlay } from "./CartOverlay.styles";
 // Component
 import SelectedProduct from "../SelectedProduct/SelectedProduct";
-import CartPage from "../pages/CartPage/CartPage";
+import { Link } from "react-router-dom";
 
 export default class CartOverlay extends Component {
   static contextType = Context;
   render() {
-    const { currencies } = this.context;
+    const { currencies, setOverlay } = this.context;
     // All selected Products
     const selectedProducts =
       JSON.parse(localStorage.getItem("SelectedProducts")) &&
@@ -96,9 +96,11 @@ export default class CartOverlay extends Component {
             // Check if SelectedArray isn't empty and product has attributes
             selectedProducts && selectedProducts.length ? (
               <div className="buttons">
-                <button onClick={() => !isopen && <CartPage />}>
-                  <span>View Bag</span>
-                </button>
+                <Link to="/cart" onClick={() => setOverlay(false)}>
+                  <button>
+                    <span>View Bag</span>
+                  </button>
+                </Link>
                 <button>
                   <span>Check out</span>
                 </button>

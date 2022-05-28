@@ -8,9 +8,9 @@ import { GlobalStyle, Wrapper } from "./GlobalStyle";
 import { currenciesQuery, categoriesQuery } from "./Queries";
 // Components
 import Navigation from "./routes/Navigation/Navigation";
-import CategoryPage from "./components/pages/CategoryPage/CategoryPage";
-import ProductPage from "./components/pages/ProductPage/ProductPage";
-import CartPage from "./components/pages/CartPage/CartPage";
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
+import ProductPage from "./pages/ProductPage/ProductPage";
+import CartPage from "./pages/CartPage/CartPage";
 
 export default class App extends Component {
   state = {
@@ -82,7 +82,6 @@ export default class App extends Component {
   render() {
     const { categories, currencies, product, SelectedProducts, isopen } =
       this.state;
-    console.log(isopen);
     return (
       <Wrapper isopen={isopen}>
         <Context.Provider
@@ -93,6 +92,7 @@ export default class App extends Component {
             categories: categories[0],
             setOverlay: this.setOverlay.bind(this),
             isopen: isopen,
+            setOverlay: this.setOverlay.bind(this),
             setSelectedProducts: this.setSelectedProducts.bind(this),
           }}
         >

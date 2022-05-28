@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 // Styles
-import { Swatch, Text } from "./ProductAttributes.styles";
+import { Swatch, Text, CartPageSwatch } from "./ProductAttributes.styles";
 
 export default class ProductAttributes extends Component {
   render() {
-    const { product, item, setAttributes, type, attributeName, className } =
-      this.props;
+    const {
+      product,
+      item,
+      setAttributes,
+      type,
+      attributeName,
+      className,
+      cartPage,
+    } = this.props;
+
     // Selected attributes of all products
     const productsSelectedAttributes = JSON.parse(
       localStorage.getItem("SelectedAttributes")
@@ -50,6 +58,7 @@ export default class ProductAttributes extends Component {
       ? item.displayValue === productAttribute[attributeName] &&
         product.id === productAttribute.id
       : null;
+
     return (
       <Swatch
         color={{
@@ -57,6 +66,7 @@ export default class ProductAttributes extends Component {
           color: item.value,
           type: type,
           className: className,
+          cartPage,
         }}
         onClick={() => setSelectedAttributes(item)}
       >
@@ -64,6 +74,7 @@ export default class ProductAttributes extends Component {
           <Text
             color={{
               className: className,
+              cartPage,
             }}
           >
             {type === "text" && item.value}

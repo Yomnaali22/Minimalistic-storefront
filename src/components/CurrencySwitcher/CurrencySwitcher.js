@@ -10,7 +10,7 @@ export default class CurrencySwitcher extends Component {
     const { currencies } = this.context;
     const { product } = this.props;
     // Product prices
-    const prices = product.prices;
+    const prices = product && product.prices;
     // Selected Currency index
     const index = JSON.parse(localStorage.getItem("currency"));
     // Find and return the amount and symbol that matchs the chosen currency
@@ -25,16 +25,13 @@ export default class CurrencySwitcher extends Component {
     );
     JSON.parse(localStorage.getItem("SelectedProducts")) &&
       selectedProducts.forEach((theproduct) => {
-        if (theproduct.id === product.id && index == false) {
+        if (theproduct.id === (product && product.id) && index == false) {
           theproduct.productPrice = prices[0].amount;
-        } else if (theproduct.id === product.id && index) {
+        } else if (theproduct.id === (product && product.id) && index) {
           theproduct.productPrice = productPrice.amount;
         }
       });
     localStorage.setItem("SelectedProducts", JSON.stringify(selectedProducts));
-    // Total price of all selected products "Want to buy products"
-    const defaultPrice =
-      selectedProducts && selectedProducts.find((pro) => pro.id === product.id);
 
     return productPrice ? (
       <Content>

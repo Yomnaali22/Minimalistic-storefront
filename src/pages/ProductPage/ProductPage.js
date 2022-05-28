@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Interweave } from "interweave";
-import API from "../../../api";
-import Context from "../../../context/context";
+import API from "./../../api";
+import Context from "./../../context/context";
 // Query
-import { productQuery } from "../../../Queries";
+import { productQuery } from "./../../Queries";
 // Styles
 import { Gallery, Wrapper, Img, Content } from "./ProductPage.styles";
 // Components
-import CurrencySwitcher from "../../CurrencySwitcher/CurrencySwitcher";
-import ProductAttributes from "../../ProductAttributes/ProductAttributes";
+import CurrencySwitcher from "./../../components/CurrencySwitcher/CurrencySwitcher";
+import ProductAttributes from "../../components/ProductAttributes/ProductAttributes";
 
 export default class ProductPage extends Component {
   static contextType = Context;
@@ -93,7 +93,7 @@ export default class ProductPage extends Component {
           name: product.name,
           brand: product.brand,
           id: product.id,
-          gallery: product.gallery[0],
+          gallery: product.gallery,
           selectedAttributes: selectedAttributes && selectedAttributes,
           productPrice:
             index === 0 || index === null
@@ -108,7 +108,7 @@ export default class ProductPage extends Component {
           name: product.name,
           brand: product.brand,
           id: product.id,
-          gallery: product.gallery[0],
+          gallery: product.gallery,
           productPrice:
             index === 0 || index === null
               ? product.prices[0].amount

@@ -24,7 +24,7 @@ export const Cart = styled.div`
   width: 450px;
   left: 1300px;
   top: 0px;
-  height: 650px;
+  height: 600px;
   background: white;
   .emptyCartText {
     position: absolute;
@@ -62,23 +62,20 @@ export const Cart = styled.div`
     padding: 0px;
     gap: 12px;
     width: 292px;
-    height: 110px;
+    height: 200px;
     button {
       background-color: var(--primaryWhite);
       width: 140px;
       height: 43px;
-      border: 1px solid black text {
-        width: 68px;
-        height: 17px;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 120%;
-        text-align: center;
-        text-transform: uppercase;
-        color: var(--primaryBlack);
-      }
+      border: 1px solid black text;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      text-transform: uppercase;
+      color: var(--primaryBlack);
     }
+
     button:focus {
       background: #5ece7b;
       border: none;
