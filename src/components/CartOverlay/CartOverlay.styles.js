@@ -1,17 +1,20 @@
 import styled from "styled-components";
 
 export const Overlay = styled.div`
-  position: ${(props) => props.isopen && "fixed"};
-  display: ${(props) => props.isopen && "block"};
+  ${(props) =>
+    props.isopen &&
+    `
+   position: fixed;
+   display: block;
+   background-color: rgba(0, 0, 0, 0.4);
+   z-index: 2;
+   cursor: 2;`}
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin-top: 83px;
   height: 100%;
-  background-color: ${(props) => props.isopen && "rgba(0, 0, 0, 0.4)"};
-  z-index: ${(props) => props.isopen && "2"};
-  cursor: ${(props) => props.isopen && "2"};
 `;
 export const Cart = styled.div`
   display: flex;

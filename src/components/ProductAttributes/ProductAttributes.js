@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // Styles
-import { Swatch, Text, CartPageSwatch } from "./ProductAttributes.styles";
+import { Swatch, Text } from "./ProductAttributes.styles";
 
 export default class ProductAttributes extends Component {
   render() {

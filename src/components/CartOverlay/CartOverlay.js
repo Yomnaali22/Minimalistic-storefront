@@ -1,59 +1,27 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Context from "../../context/context";
 // Style
 import { Cart, Overlay } from "./CartOverlay.styles";
-// Component
+// Components
 import SelectedProduct from "../SelectedProduct/SelectedProduct";
-import { Link } from "react-router-dom";
-
+import TotalPrices from "../TotalPrices/TotalPrices";
 export default class CartOverlay extends Component {
   static contextType = Context;
   render() {
-    const { currencies, setOverlay } = this.context;
+    const { setOverlay } = this.context;
     const { isopen } = this.props;
-
     // All selected Products
     const selectedProducts =
       JSON.parse(localStorage.getItem("SelectedProducts")) &&
       JSON.parse(localStorage.getItem("SelectedProducts"));
 
-    // Selected Currency
-    const currencyIndex = localStorage.getItem("currency");
-
-    // Selected Currency symbol
-    const symbol =
-      currencies[currencyIndex] && currencies[currencyIndex].symbol;
-
-    // the quantity of of each item in cart
-    const amounts =
-      selectedProducts &&
-      selectedProducts.map((product) => {
-        {
-          return { amount: product.productAmount, id: product.id };
-        }
-      });
-
-    // all products quantity
+    // first: get all products quantity
     const productsQuantity =
-      amounts &&
-      amounts.reduce((total, curr) => {
-        return total + curr.amount;
+      selectedProducts &&
+      selectedProducts.reduce((total, curr) => {
+        return total + curr.productAmount;
       }, 0);
-
-    // Total price of the products
-    const totalPrice = selectedProducts
-      .map((theproduct) => {
-        return amounts.map((product) => {
-          if (product.id === theproduct.id) {
-            return theproduct.productPrice * product.amount;
-          }
-        });
-      })
-      .reduce(function (a, b) {
-        return a.concat(b);
-      }, [])
-      .filter((product) => product !== undefined)
-      .reduce((prev, curr) => prev + curr, 0);
 
     return (
       <Overlay isopen={isopen}>
@@ -86,15 +54,7 @@ export default class CartOverlay extends Component {
                 )
             }
           </div>
-          {
-            // Check if SelectedArray isn't empty and product has attributes
-            selectedProducts && selectedProducts.length ? (
-              <div className="totalPrice">
-                <span className="total">Total: </span>
-                <span>{`${symbol || "$"}${totalPrice}`}</span>
-              </div>
-            ) : null
-          }
+          {<TotalPrices className="miniCart" />}
           {
             // Check if SelectedArray isn't empty and product has attributes
             selectedProducts && selectedProducts.length ? (

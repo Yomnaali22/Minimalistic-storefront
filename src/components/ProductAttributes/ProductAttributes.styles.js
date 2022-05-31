@@ -1,13 +1,6 @@
 import styled from "styled-components";
 
 export const Swatch = styled.div`
-  display: inline-block;
-  position: relative;
-  left: -1px;
-  top: 2px;
-  margin: 0px 2px;
-  width: 50px;
-  height: 50px;
   ${(props) =>
     props.color.type === "swatch" &&
     props.color.className &&
@@ -41,6 +34,13 @@ export const Swatch = styled.div`
     height: 45px;
     box-sizing: border-box;
   `}
+  display: inline-block;
+  position: relative;
+  left: -1px;
+  top: 2px;
+  margin: 0px 2px;
+  width: 50px;
+  height: 50px;
 `;
 export const Text = styled.li`
   list-style: none;
