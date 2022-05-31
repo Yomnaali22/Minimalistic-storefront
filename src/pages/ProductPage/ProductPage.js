@@ -33,12 +33,12 @@ export default class ProductPage extends Component {
   }
 
   // Set the attributes of the product
-  setAttributes(productsColors) {
+  setAttributes(attributes) {
     this.setState({
       product: {
         SelectedAttributes: localStorage.setItem(
           "SelectedAttributes",
-          JSON.stringify(productsColors)
+          JSON.stringify(attributes)
         ),
       },
     });

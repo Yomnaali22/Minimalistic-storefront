@@ -10,6 +10,8 @@ import {
 // Components
 import CurrencySwitcher from "../CurrencySwitcher/CurrencySwitcher";
 import ProductAttributes from "../ProductAttributes/ProductAttributes";
+import SimpleImageSlider from "react-simple-image-slider";
+import ImageSlider from "../ImageSlider/ImageSlider";
 
 export default class SelectedProduct extends Component {
   static contextType = Context;
@@ -58,28 +60,36 @@ export default class SelectedProduct extends Component {
       });
       setSelectedProducts(filteredArr);
     };
-
+    // console.log(className, selectedProducts);
     return (
       selectedProducts.length !== 0 && (
         <Wrapper className={className}>
           <ProductWrapper className={className}>
-            <img src={selectedProduct.gallery[0]} />
+            {className === "cartPage" ? (
+              <ImageSlider images={selectedProduct.gallery} />
+            ) : (
+              <img src={selectedProduct.gallery[0]} />
+            )}
             <div className="button">
-              <button
-                onClick={() => {
+              <a
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
                   increasProductAmount();
                 }}
               >
-                <span>+</span>
-              </button>
+                +
+              </a>
               <span className="amount">{productQuantity}</span>
-              <button
-                onClick={() => {
+              <a
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
                   decreaseProductAmount();
                 }}
               >
-                <span>-</span>
-              </button>
+                -
+              </a>
             </div>
             <Text className={className}>
               <span className="brand">{selectedProduct.brand}</span>

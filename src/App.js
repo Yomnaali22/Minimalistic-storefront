@@ -63,7 +63,6 @@ export default class App extends Component {
   }
   render() {
     const { categories, currencies, product, selectedProducts } = this.state;
-    console.log(JSON.parse(localStorage.getItem("SelectedProducts")));
     return (
       <Wrapper>
         <Context.Provider

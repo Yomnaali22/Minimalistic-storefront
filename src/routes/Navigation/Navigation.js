@@ -61,6 +61,16 @@ export default class Navigation extends Component {
     const categoryindex = localStorage.getItem("categoryIndex");
     const name =
       categoriesNames[categoryindex] && categoriesNames[categoryindex].name;
+
+    const selectedProducts = JSON.parse(
+      localStorage.getItem("SelectedProducts")
+    );
+    const productsQuantity =
+      selectedProducts &&
+      selectedProducts.reduce((total, curr) => {
+        return total + curr.productAmount;
+      }, 0);
+
     return (
       <Header>
         <LogoIcon src={GreenLogo} className="greenIcon" />
@@ -109,8 +119,9 @@ export default class Navigation extends Component {
               }
             </p>
           </button>
-          <img src={ArrowIcon} className="victorIcon" />
           <DropdownWrapper dropdown={!dropdown} isOpen={!openOverlay}>
+            <img src={ArrowIcon} className="victorIcon" />
+
             {dropdown ? (
               <Dropdown
                 currencies={currencies}
@@ -120,6 +131,9 @@ export default class Navigation extends Component {
               />
             ) : null}
           </DropdownWrapper>
+          {productsQuantity ? (
+            <div className="cartlogo">{productsQuantity}</div>
+          ) : null}
           <img src={CartIcon} onClick={() => this.setOverlay(!openOverlay)} />
           {
             // Show Overlay

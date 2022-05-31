@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Context from "../../context/context";
-// Style
+// Styles
 import { Cart, Overlay } from "./CartOverlay.styles";
 // Components
 import SelectedProduct from "../SelectedProduct/SelectedProduct";
-import TotalPrices from "../TotalPrices/TotalPrices";
+import ProductsTotalPrice from "../ProductsTotalPrice/ProductsTotalPrice";
+
 export default class CartOverlay extends Component {
   static contextType = Context;
   render() {
@@ -54,7 +55,7 @@ export default class CartOverlay extends Component {
                 )
             }
           </div>
-          {<TotalPrices className="miniCart" />}
+          {<ProductsTotalPrice className="miniCart" />}
           {
             // Check if SelectedArray isn't empty and product has attributes
             selectedProducts && selectedProducts.length ? (

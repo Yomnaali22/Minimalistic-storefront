@@ -3,14 +3,13 @@ import React, { Component } from "react";
 import { Wrapper, Headline } from "./CartPage.styles";
 // Components
 import SelectedProduct from "../../components/SelectedProduct/SelectedProduct";
-import TotalPrices from "../../components/TotalPrices/TotalPrices";
+import ProductsTotalPrice from "../../components/ProductsTotalPrice/ProductsTotalPrice";
 export default class CartPage extends Component {
   render() {
     // All selected Products
     const selectedProducts = JSON.parse(
       localStorage.getItem("SelectedProducts")
     );
-
     return (
       <Wrapper>
         <Headline>Cart</Headline>
@@ -28,7 +27,7 @@ export default class CartPage extends Component {
               );
             })
         }
-        {<TotalPrices className="cartPage" />}
+        <ProductsTotalPrice className="cartPage" />
       </Wrapper>
     );
   }

@@ -55,3 +55,11 @@ export const Image = styled.img`
   height: 550px;
   opacity: ${(props) => (props.inStock === false ? "0.5" : null)};
 `;
+
+export const InCartLogo = styled.img`
+  position: absolute;
+  left: 80%;
+  right: 0%;
+  top: 80%;
+  bottom: 0%;
+`;

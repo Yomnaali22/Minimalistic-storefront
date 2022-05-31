@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 5px;
+  //padding: 5px;
   gap: 5px;
   height: 280px;
   ${(props) =>
@@ -40,31 +40,23 @@ export const ProductWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 70px;
-    .amount {
+    width: 50px;
+    margin-right: 10px;
+
+    a {
+      border: 0.5px solid black;
+      background-color: white;
+      height: 30px;
+      text-decoration: none;
+      text-align: center;
+      font-size: 20px;
+      position: relative;
       ${(props) =>
         props.className &&
-        `
-      width: 0px;
-      position: relative;
-      right: 90px;
+        `margin-top: 10px;
+        right: 24px;
     `}
     }
-
-    width: 50px;
-    button {
-      background-color: white;
-      border: 1px solid black;
-      height: 30px;
-      text {
-        text-align: center;
-      }
-    }
-    ${(props) =>
-      props.className &&
-      `
-    margin-top: 10px;
- 
-    `}
   }
 `;
 

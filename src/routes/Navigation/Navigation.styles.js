@@ -53,13 +53,30 @@ export const LogoContainer = styled.div`
   position: absolute;
   top: 30px;
   left: 90%;
-  gap: 26px;
+  gap: 30px;
   .greenIcon {
     position: absolute;
     right: 750px;
     top: 9px;
   }
 
+  .cartlogo {
+    background: rgb(29, 31, 34, 0.9);
+    border-radius: 60px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 25px;
+    position: absolute;
+    left: 65px;
+    top: 10px;
+  }
   button {
     background-color: white;
     border: none;
@@ -72,19 +89,16 @@ export const LogoContainer = styled.div`
 export const DropdownWrapper = styled.div`
   position: absolute;
   right: 0%;
-  top: 85%;
+  top: 62%;
   right: 250%;
   z-index: 1;
   background-color: white;
   .victorIcon {
     position: absolute;
-    top: 30%;
-    right: 250%;
-    margin-left: 7px;
-    width: 13px;
+    left: 140px;
+    width: 10px;
+    top: -10px;
     transform: ${(props) =>
-      props.isOpen === true && props.dropdown === true
-        ? "matrix(1, 0, 0, -1, 0, 0)"
-        : null};
+      props.dropdown === true ? "matrix(1, 0, 0, -1, 0, 0)" : null};
   }
 `;
