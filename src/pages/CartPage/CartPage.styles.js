@@ -16,7 +16,6 @@ export const Wrapper = styled(ProductWrapper)`
     top: 44.23%;
     bottom: 35.13%;
   }
-
   .button {
     display: flex;
     flex-direction: column;
@@ -56,7 +55,7 @@ export const Content = styled.div`
   padding: 40px 0px;
   gap: 8px;
   width: 198px;
-  height: 100px;
+  height: 300px;
   position: relative;
   right: 1670px;
 `;

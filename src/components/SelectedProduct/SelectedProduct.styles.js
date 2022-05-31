@@ -10,14 +10,13 @@ export const Wrapper = styled.div`
   ${(props) =>
     props.className &&
     `gap: 0px;
-    height: 250px;
+    height: 350px;
     margin-top: 0px;
   `}
 
   ${(props) =>
     props.cartPage &&
     `
-  height: 500px;
   gap: 0px;
   `}
 `;

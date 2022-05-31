@@ -14,7 +14,6 @@ export const Header = styled.div`
     text-transform: uppercase;
   }
 `;
-
 const handleColor = (props) => {
   return props.categoriesNames[props.index].name === props.category_name
     ? "#5ECE7B" || true
@@ -40,7 +39,6 @@ export const Content = styled.div`
     margin-left: 110px;
   }
 `;
-
 export const LogoIcon = styled.img`
   position: relative;
   width: 41px;
@@ -61,22 +59,32 @@ export const LogoContainer = styled.div`
     right: 750px;
     top: 9px;
   }
-  p {
+
+  button {
+    background-color: white;
+    border: none;
     font-size: 20px;
-
-    .victorIcon {
-      margin-left: 7px;
-      width: 13px;
-      transform: ${(props) =>
-        props.isOpen === true && props.dropdown === true
-          ? "matrix(1, 0, 0, -1, 0, 0)"
-          : null};
-    }
+    text-decoration: none;
+    color: black;
   }
+`;
 
-  .dropdown {
+export const DropdownWrapper = styled.div`
+  position: absolute;
+  right: 0%;
+  top: 85%;
+  right: 250%;
+  z-index: 1;
+  background-color: white;
+  .victorIcon {
     position: absolute;
-    right: 0%;
-    top: 85%;
+    top: 30%;
+    right: 250%;
+    margin-left: 7px;
+    width: 13px;
+    transform: ${(props) =>
+      props.isOpen === true && props.dropdown === true
+        ? "matrix(1, 0, 0, -1, 0, 0)"
+        : null};
   }
 `;

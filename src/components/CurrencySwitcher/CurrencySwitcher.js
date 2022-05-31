@@ -32,7 +32,6 @@ export default class CurrencySwitcher extends Component {
         }
       });
     localStorage.setItem("SelectedProducts", JSON.stringify(selectedProducts));
-
     return productPrice ? (
       <Content>
         {

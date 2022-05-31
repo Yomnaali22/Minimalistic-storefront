@@ -21,33 +21,40 @@ export default class SelectedProduct extends Component {
       categories.products.find(
         (theProduct) => theProduct.id === selectedProduct.id
       );
-    // Find Each product amount
-    const amount = selectedProducts.find((pro) => {
-      return pro.id === selectedProduct.id;
-    });
-    // Increase the amount of produc that matches product id
+    // Find product quantity with the matching id
+    const productQuantity =
+      selectedProducts &&
+      selectedProducts.find((pro) => {
+        return pro.id === selectedProduct.id;
+      }).productAmount;
+
+    // Increase the amount of product with the matching id
     const increasProductAmount = () => {
-      const productAmount = selectedProducts.map((pro) => {
-        if (pro.id === selectedProduct.id)
-          pro.productAmount = pro.productAmount + 1;
-        return pro;
-      });
+      const productAmount =
+        selectedProducts &&
+        selectedProducts.map((product) => {
+          if (product.id === selectedProduct.id)
+            product.productAmount = productQuantity + 1;
+          return product;
+        });
       // Update state of the selected products
       setSelectedProducts(productAmount);
     };
 
-    // Decrease the amount of produc that matches product id
+    // Decrease the amount of product with the matching id
     const decreaseProductAmount = () => {
-      const productAmount = selectedProducts.map((pro) => {
-        if (pro.id === selectedProduct.id)
-          pro.productAmount = pro.productAmount - 1;
-        return pro;
-      });
+      const productAmount =
+        selectedProducts &&
+        selectedProducts.map((product) => {
+          if (product.id === selectedProduct.id)
+            product.productAmount = productQuantity - 1;
+          return product;
+        });
       // Update state of the selected products
       setSelectedProducts(productAmount);
 
-      const filteredArr = selectedProducts.filter((pro) => {
-        return pro.productAmount !== 0;
+      const filteredArr = selectedProducts.filter((product) => {
+        return product.productAmount !== 0;
       });
       setSelectedProducts(filteredArr);
     };
@@ -65,7 +72,7 @@ export default class SelectedProduct extends Component {
               >
                 <span>+</span>
               </button>
-              <span className="amount">{amount.productAmount}</span>
+              <span className="amount">{productQuantity}</span>
               <button
                 onClick={() => {
                   decreaseProductAmount();

@@ -9,10 +9,19 @@ export const Swatch = styled.div`
   width: 50px;
   height: 50px;
   ${(props) =>
+    props.color.type === "swatch" &&
     props.color.className &&
-    `
-  width: 40px; 
-  height: 20px;`}
+    ` 
+  width: 25px; 
+  height: 20px;
+      `}
+  ${(props) =>
+    props.color.type === "text" &&
+    props.color.className &&
+    ` 
+  width: 50px; 
+  height: 30px;
+      `}
   background-color: ${({ color }) => color.color};
   border: ${(props) => {
     return (

@@ -19,7 +19,6 @@ export default class ProductPage extends Component {
         [] || JSON.parse(localStorage.getItem("SelectedAttributes")),
     },
   };
-
   // Get the product data
   async componentDidMount() {
     try {

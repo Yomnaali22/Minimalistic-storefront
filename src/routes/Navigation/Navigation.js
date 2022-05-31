@@ -7,18 +7,31 @@ import GreenLogo from "./../../assets/Logo.svg";
 import CartIcon from "./../../assets/Cart.svg";
 import ArrowIcon from "./../../assets/Victor.svg";
 // Styles
-import { Header, LogoContainer, Content, LogoIcon } from "./Navigation.styles";
+import {
+  Header,
+  LogoContainer,
+  Content,
+  LogoIcon,
+  DropdownWrapper,
+} from "./Navigation.styles";
 // Components
 import CartOverlay from "../../components/CartOverlay/CartOverlay";
 import Dropdown from "../../components/Dropdown/Dropdown";
 
 export default class Navigation extends Component {
   state = {
-    categoriesNames: [],
-    open: false,
     dropdown: false,
+    openOverlay: false,
+    categoriesNames: [],
     categoryIndex: localStorage.getItem("categoryIndex"),
   };
+
+  // Overlay of the mini cart
+  setOverlay(boolean) {
+    this.setState({
+      openOverlay: boolean,
+    });
+  }
 
   async componentDidMount() {
     try {
@@ -32,10 +45,15 @@ export default class Navigation extends Component {
     if (!localStorage.getItem("categoryIndex")) {
       localStorage.setItem("categoryIndex", 0);
     }
+
+    window.addEventListener("scroll", () => {
+      if (this.state.openOverlay) {
+        this.setOverlay(false);
+      }
+    });
   }
   render() {
-    const { categoriesNames, dropdown, open } = this.state;
-    const { setOverlay, isopen } = this.props;
+    const { categoriesNames, dropdown, openOverlay } = this.state;
     const currencies = this.props.currencies;
     const setCurrency = this.props.setCurrency;
     // Selected currency index
@@ -75,36 +93,39 @@ export default class Navigation extends Component {
             );
           })
         }
-        <LogoContainer isOpen={!isopen} dropdown={!dropdown}>
-          <p
-            aria-expanded={dropdown ? "true" : "false"}
-            onClick={() => {
-              this.setState({
-                dropdown: !dropdown,
-                open: !open,
-              });
-            }}
-          >
-            {
-              // Currency change to the selected one
-              (currencies[index] && currencies[index].symbol) || "$"
-            }
-            <img src={ArrowIcon} className="victorIcon" />
-          </p>
-          <div className="dropdown">
+        <LogoContainer>
+          <button>
+            <p
+              aria-expanded={dropdown ? "true" : "false"}
+              onClick={() => {
+                this.setState({
+                  dropdown: !dropdown,
+                });
+              }}
+            >
+              {
+                // Currency change to the selected one
+                (currencies[index] && currencies[index].symbol) || "$"
+              }
+            </p>
+          </button>
+          <img src={ArrowIcon} className="victorIcon" />
+          <DropdownWrapper dropdown={!dropdown} isOpen={!openOverlay}>
             {dropdown ? (
               <Dropdown
                 currencies={currencies}
                 setCurrency={setCurrency.bind(this)}
                 dropdown={dropdown}
-                isOpen={open}
+                openOverlay={openOverlay}
               />
             ) : null}
-          </div>
-          <img src={CartIcon} onClick={() => setOverlay(!isopen)} />
+          </DropdownWrapper>
+          <img src={CartIcon} onClick={() => this.setOverlay(!openOverlay)} />
           {
             // Show Overlay
-            isopen && <CartOverlay className="overlay" isopen={isopen} />
+            openOverlay && (
+              <CartOverlay className="overlay" isopen={openOverlay} />
+            )
           }
         </LogoContainer>
         <Outlet />

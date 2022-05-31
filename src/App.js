@@ -17,9 +17,8 @@ export default class App extends Component {
     categories: [],
     currencies: [],
     product: {},
-    isopen: false,
     selectedCurrency: localStorage.getItem("currency") || 0,
-    SelectedProducts:
+    selectedProducts:
       JSON.parse(localStorage.getItem("SelectedProducts")) || [],
   };
 
@@ -38,14 +37,7 @@ export default class App extends Component {
     } catch (error) {
       console.log("error", error);
     }
-    window.addEventListener("scroll", () => {
-      if (this.state.isopen)
-        this.setState({
-          isopen: false,
-        });
-    });
   }
-
   // Product
   setProduct(product) {
     this.setState({
@@ -54,7 +46,6 @@ export default class App extends Component {
       },
     });
   }
-
   // Set chosen currency state in localstorage
   setCurrency(index) {
     this.setState({
@@ -65,34 +56,22 @@ export default class App extends Component {
   // Want to buy products
   setSelectedProducts(products) {
     this.setState({
-      SelectedProducts: localStorage.setItem(
-        "SelectedProducts",
-        JSON.stringify(products)
-      ),
+      selectedProducts:
+        localStorage.setItem("SelectedProducts", JSON.stringify(products)) ||
+        products,
     });
   }
-
-  // Overlay of the mini cart
-  setOverlay(boolean) {
-    this.setState({
-      isopen: boolean,
-    });
-  }
-
   render() {
-    const { categories, currencies, product, SelectedProducts, isopen } =
-      this.state;
+    const { categories, currencies, product, selectedProducts } = this.state;
+    console.log(JSON.parse(localStorage.getItem("SelectedProducts")));
     return (
-      <Wrapper isopen={isopen}>
+      <Wrapper>
         <Context.Provider
           value={{
             currencies: currencies,
             product: product,
-            SelectedProducts: SelectedProducts,
+            selectedProducts: selectedProducts,
             categories: categories[0],
-            setOverlay: this.setOverlay.bind(this),
-            isopen: isopen,
-            setOverlay: this.setOverlay.bind(this),
             setSelectedProducts: this.setSelectedProducts.bind(this),
           }}
         >
@@ -103,8 +82,6 @@ export default class App extends Component {
                 <Navigation
                   currencies={currencies}
                   setCurrency={this.setCurrency.bind(this)}
-                  setOverlay={this.setOverlay.bind(this)}
-                  isopen={isopen}
                 />
               }
             >

@@ -10,6 +10,8 @@ export default class CartOverlay extends Component {
   static contextType = Context;
   render() {
     const { currencies, setOverlay } = this.context;
+    const { isopen } = this.props;
+
     // All selected Products
     const selectedProducts =
       JSON.parse(localStorage.getItem("SelectedProducts")) &&
@@ -17,41 +19,42 @@ export default class CartOverlay extends Component {
 
     // Selected Currency
     const currencyIndex = localStorage.getItem("currency");
-    const { isopen } = this.props;
 
     // Selected Currency symbol
     const symbol =
       currencies[currencyIndex] && currencies[currencyIndex].symbol;
 
-    // Only Return an array of the selected Products prices
-    const productPrices =
+    // the quantity of of each item in cart
+    const amounts =
       selectedProducts &&
       selectedProducts.map((product) => {
-        return product.productPrice;
-      });
-    // Sum of all prices
-    const totalPrice =
-      productPrices &&
-      productPrices.reduce((prev, curr) => {
-        return prev + curr;
-      }, 0);
-
-    // A single product Amount
-    const amount =
-      selectedProducts &&
-      selectedProducts.map((product) => {
-        return product.productAmount;
+        {
+          return { amount: product.productAmount, id: product.id };
+        }
       });
 
-    // All cart products amount
-    const cartItemsAmount =
-      amount &&
-      amount.reduce((prev, curr) => {
-        return prev + curr;
+    // all products quantity
+    const productsQuantity =
+      amounts &&
+      amounts.reduce((total, curr) => {
+        return total + curr.amount;
       }, 0);
 
-    // Save sum in local storage
-    localStorage.setItem("totalPrice", totalPrice);
+    // Total price of the products
+    const totalPrice = selectedProducts
+      .map((theproduct) => {
+        return amounts.map((product) => {
+          if (product.id === theproduct.id) {
+            return theproduct.productPrice * product.amount;
+          }
+        });
+      })
+      .reduce(function (a, b) {
+        return a.concat(b);
+      }, [])
+      .filter((product) => product !== undefined)
+      .reduce((prev, curr) => prev + curr, 0);
+
     return (
       <Overlay isopen={isopen}>
         <Cart>
@@ -59,7 +62,7 @@ export default class CartOverlay extends Component {
             // if user selectes products
             selectedProducts && selectedProducts.length ? (
               <p>
-                My Bag, {cartItemsAmount}
+                My Bag, {productsQuantity}
                 <span className="items"> items</span>
               </p>
             ) : (
@@ -88,7 +91,7 @@ export default class CartOverlay extends Component {
             selectedProducts && selectedProducts.length ? (
               <div className="totalPrice">
                 <span className="total">Total: </span>
-                <span>{`${symbol || "$"}${totalPrice * cartItemsAmount}`}</span>
+                <span>{`${symbol || "$"}${totalPrice}`}</span>
               </div>
             ) : null
           }
