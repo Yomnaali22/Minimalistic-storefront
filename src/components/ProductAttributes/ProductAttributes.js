@@ -14,6 +14,8 @@ export default class ProductAttributes extends Component {
       cartPage,
     } = this.props;
 
+    console.log("th", className);
+
     // Selected attributes of all products
     const productsSelectedAttributes = JSON.parse(
       localStorage.getItem("SelectedAttributes")

@@ -4,27 +4,24 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  //padding: 5px;
   gap: 5px;
-  height: 280px;
-  ${(props) =>
-    props.className &&
-    `gap: 0px;
-    height: 350px;
-    margin-top: 0px;
-  `}
-
-  ${(props) =>
-    props.cartPage &&
-    `
-  gap: 0px;
-  `}
+  ${(props) => {
+    // Cart page
+    return (
+      props.className &&
+      `gap: 0px;
+      height: 350px;
+  `
+    );
+  }}
+  ${(props) => props.cartPage && `gap: 0px;`}
 `;
+
 export const ProductWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-start;
-  width: 450px;
+  width: 100%;
   border-top: ${(props) =>
     props.className &&
     `1px solid #E5E5E5;
@@ -32,18 +29,20 @@ export const ProductWrapper = styled.div`
     `};
 
   img {
-    width: 199px;
-    height: 220px;
+    width: 121px;
+    height: 190px;
     ${(props) => props.className && `margin-top: 10px`}
   }
   .button {
     display: flex;
     flex-direction: column;
-    gap: 70px;
-    width: 50px;
+    justify-content: space-between;
+    gap: 50px;
+    width: 10%;
     margin-right: 10px;
 
     a {
+      background-color: black;
       border: 0.5px solid black;
       background-color: white;
       height: 30px;
@@ -67,8 +66,7 @@ export const Text = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position: absolute;
-  left: 0%;
+  width: 80%;
   .brand,
   .name,
   .price {
@@ -97,9 +95,10 @@ line-height: 24px;
 .attributes{
   text-transform: uppercase;
   font-family: 'Roboto Condensed';
-font-style: normal;
-font-weight: 700;
-font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  width: 20%;
 }
 `
       : `
@@ -107,16 +106,16 @@ font-size: 18px;
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 10px;
-  width: 500px;
-  height: 250px;
+  width: 55%;
   .brand,
   .name,
   .price {
     margin-bottom: 10px;
   }
   .attributes {
+    width: 100%;
     display: inline-block;
+    align-items: left;
     text-transform: uppercase;
   }`}
 `;

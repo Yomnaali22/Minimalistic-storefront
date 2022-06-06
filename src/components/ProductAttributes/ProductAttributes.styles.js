@@ -2,17 +2,29 @@ import styled from "styled-components";
 
 export const Swatch = styled.div`
   ${(props) =>
-    props.color.type === "swatch" &&
-    props.color.className &&
-    ` 
-  width: 25px; 
-  height: 20px;
+    props.color.type === "swatch" && props.color.className
+      ? ` 
+  display: inline-block;
+  margin: 0px 2px;
+  width: 10%; 
+  height: 25px;
+      `
+      : `
+      display: inline-block;
+  //  position: relative;
+  //left: -1px;
+  // top: 2px;
+  margin: 0px 2px;
+  width: 10%;
+  height: 50px;
       `}
   ${(props) =>
     props.color.type === "text" &&
     props.color.className &&
     ` 
-  width: 50px; 
+
+  width: 20%; 
+  max-width: 50%;
   height: 30px;
       `}
   background-color: ${({ color }) => color.color};
@@ -30,17 +42,15 @@ export const Swatch = styled.div`
   border: ${(props) => props.color.type === "text" && "1px solid black"};
   ${(props) =>
     props.color.cartPage &&
-    `width: 70px;
-    height: 45px;
-    box-sizing: border-box;
-  `}
-  display: inline-block;
-  position: relative;
-  left: -1px;
-  top: 2px;
-  margin: 0px 2px;
-  width: 50px;
-  height: 50px;
+    `
+    width: 18%;
+    `}
+  ${(props) =>
+    props.color.cartPage &&
+    props.color.type === "swatch" &&
+    `
+    width: 10%;
+    `}
 `;
 export const Text = styled.li`
   list-style: none;
@@ -49,11 +59,12 @@ export const Text = styled.li`
   ${(props) =>
     props.color.className
       ? `
-      font-size: 14px;
-      width: 0px;
-      height: 0px;
-      top: 2px;
-      left: 5px;
+
+
+  margin: 5px 1px;
+  width: 100%; 
+  height: 25px;
+  font-size: 14px;
   `
       : `
   font-size: 17px;
@@ -63,16 +74,10 @@ export const Text = styled.li`
   ${(props) =>
     props.color.cartPage &&
     `
-    position: absolute;
-    width: 12px;
-    height: 18px;
-    left: 20px;
-    top: 12px;
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
-    display: flex;
     `}
 `;

@@ -13,20 +13,24 @@ export default class CartPage extends Component {
     return (
       <Wrapper>
         <Headline>Cart</Headline>
-        {
-          // If user added products to cart
-          selectedProducts &&
-            selectedProducts.map((selectedProduct, index, selectedProducts) => {
-              return (
-                <SelectedProduct
-                  key={index}
-                  selectedProduct={selectedProduct}
-                  selectedProducts={selectedProducts}
-                  className="cartPage"
-                />
-              );
-            })
-        }
+        <div>
+          {
+            // If user added products to cart
+            selectedProducts &&
+              selectedProducts.map(
+                (selectedProduct, index, selectedProducts) => {
+                  return (
+                    <SelectedProduct
+                      key={index}
+                      selectedProduct={selectedProduct}
+                      selectedProducts={selectedProducts}
+                      className="cartPage"
+                    />
+                  );
+                }
+              )
+          }
+        </div>
         <ProductsTotalPrice className="cartPage" />
       </Wrapper>
     );

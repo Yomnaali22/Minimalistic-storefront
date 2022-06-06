@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Routes, Route } from "react-router-dom";
 import Context from "./context/context";
 import API from "./api";
-// Styles
 import { GlobalStyle, Wrapper } from "./GlobalStyle";
 // Queries
 import { currenciesQuery, categoriesQuery } from "./Queries";
@@ -14,6 +13,7 @@ import CartPage from "./pages/CartPage/CartPage";
 
 export default class App extends Component {
   state = {
+    dropdown: false,
     categories: [],
     currencies: [],
     product: {},
@@ -21,7 +21,6 @@ export default class App extends Component {
     selectedProducts:
       JSON.parse(localStorage.getItem("SelectedProducts")) || [],
   };
-
   async componentDidMount() {
     try {
       const categoriesAndcurrencies = await Promise.all([
@@ -37,7 +36,9 @@ export default class App extends Component {
     } catch (error) {
       console.log("error", error);
     }
+    console.log("didmount");
   }
+
   // Product
   setProduct(product) {
     this.setState({
@@ -61,10 +62,11 @@ export default class App extends Component {
         products,
     });
   }
+
   render() {
     const { categories, currencies, product, selectedProducts } = this.state;
     return (
-      <Wrapper>
+      <>
         <Context.Provider
           value={{
             currencies: currencies,
@@ -96,7 +98,7 @@ export default class App extends Component {
                 }
               />
               {
-                // Dynamically rendering each category
+                // Rendering each category
                 categories.map((category) => {
                   const categoryName = category.name;
                   return categoryName === "all" ? (
@@ -118,7 +120,7 @@ export default class App extends Component {
           </Routes>
           <GlobalStyle />
         </Context.Provider>
-      </Wrapper>
+      </>
     );
   }
 }

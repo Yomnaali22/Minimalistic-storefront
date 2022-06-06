@@ -1,12 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 export const Wrapper = styled.div`
-  width: 1000px;
-  height: 1000px;
-  @media screen {
-    max-height: 1500px;
-    max-width: 1500px;
-  }
+  width: 100%;
 `;
 
 export const GlobalStyle = createGlobalStyle`

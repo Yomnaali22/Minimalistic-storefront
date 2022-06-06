@@ -5,21 +5,21 @@ export const Wrapper = styled(ProductWrapper)`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 100%;
+  width: 95%;
   position: absolute;
-  right: 300px;
   top: 220px;
-  left: 0px;
   img {
     left: 79.17%;
     right: 6.94%;
     top: 44.23%;
     bottom: 35.13%;
+    width: 10%;
   }
+
   .button {
     display: flex;
     flex-direction: column;
-    gap: 70px;
+    gap: 55px;
     margin-right: -70px;
     width: 35px;
     button {
@@ -36,16 +36,19 @@ export const Wrapper = styled(ProductWrapper)`
 `;
 
 export const Headline = styled.h1`
+  left: 120px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  text-transform: uppercase;
   position: absolute;
-  width: 84px;
   height: 40px;
-  left: 30px;
-  top: -100px;
+  bottom: 100%;
+  font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
-  text-transform: uppercase;
 `;
 
 export const Content = styled.div`
@@ -54,16 +57,10 @@ export const Content = styled.div`
   align-items: flex-start;
   padding: 40px 0px;
   gap: 8px;
-  width: 198px;
-  height: 300px;
-  position: relative;
-  right: 1670px;
+  width: 93.5%;
 `;
 
 export const Text = styled.div`
-  width: 184px;
-  height: 28px;
-
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
@@ -73,7 +70,7 @@ export const Text = styled.div`
 
 export const Button = styled.button`
   padding: 16px 32px;
-  width: 279px;
+  width: 299%;
   height: 43px;
   background: #5ece7b;
   border: none;

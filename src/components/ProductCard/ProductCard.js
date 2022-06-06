@@ -9,6 +9,7 @@ import InCartLogoIcon from "./../../assets/InCartLogo.svg";
 export default class ProductCard extends Component {
   static contextType = Context;
   globalState = this.context;
+
   render() {
     const { product } = this.props;
     const setProudctId = () => {

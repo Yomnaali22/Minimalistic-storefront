@@ -1,70 +1,80 @@
 import styled from "styled-components";
 
+const handleColor = (props) =>
+  props.categoriesNames[props.index].name === props.category_name && "#5ECE7B";
+
 export const Header = styled.div`
   position: absolute;
-  left: 1.5%;
-  right: 1%;
-  top: 0%;
-  bottom: 92%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  height: 56px;
+  width: 100%;
+  height: 80px;
   .nav-link {
-    text-transform: uppercase;
-  }
-`;
-const handleColor = (props) => {
-  return props.categoriesNames[props.index].name === props.category_name
-    ? "#5ECE7B" || true
-    : false;
-};
-
-export const Content = styled.div`
-  .nav-link {
-    font-size: var(--linkSize);
-    font-weight: 400;
-    line-height: 120%;
-    height: 20px;
     text-decoration: none;
-    color: var(--primaryBlack);
-    color: ${(props) => handleColor(props)};
-    border-bottom: ${(props) =>
-      handleColor(props) ? "2px solid #5ECE7B" : null};
-    font-weight: ${(props) => (handleColor(props) ? "600" : null)};
-    transition: all 0.1s ease-in-out;
-    padding: 28px;
   }
-  :first-child {
-    margin-left: 110px;
+  .victorIcon {
+    position: absolute;
+    left: 95.47%;
+    right: 20.59%;
+    top: 77.75%;
+    bottom: 38.75%;
+    margin-left: 10px;
+    transform: ${(props) =>
+      props.dropdown ? "matrix(1, 0, 0, -1, 0, 0)" : null};
   }
-`;
-export const LogoIcon = styled.img`
-  position: relative;
-  width: 41px;
-  height: 41px;
-  left: 900px;
-  top: 20px;
 `;
 
-export const LogoContainer = styled.div`
+export const Nav = styled.div`
+  position: absolute;
+  width: 50%;
+  height: 56px;
+  left: 5%;
+  bottom: 0px;
   display: flex;
   flex-direction: row;
+  list-style: none;
+`;
+
+export const Content = styled.li`
+  text-transform: uppercase;
+  font-size: var(--linkSize);
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--primaryBlack);
+  color: ${(props) => handleColor(props)};
+  ${(props) => {
+    return handleColor(props)
+      ? `
+      border-bottom: 2px solid #5ECE7B;
+      font-weight: 600;
+      `
+      : null;
+  }}
+  transition: all 0.1s ease-in-out;
+  padding: 25px;
+`;
+
+export const LogoIcon = styled.img`
   position: absolute;
-  top: 30px;
-  left: 90%;
-  gap: 30px;
-  .greenIcon {
-    position: absolute;
-    right: 750px;
-    top: 9px;
-  }
+  width: 30%;
+  height: 41px;
+  left: 35%;
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 22px;
+  position: absolute;
+  width: 50%;
+  height: 40px;
+  right: 5%;
+  top: 50%;
 
   .cartlogo {
     background: rgb(29, 31, 34, 0.9);
     border-radius: 60px;
-    width: 25px;
-    height: 25px;
     text-align: center;
     font-family: "Roboto";
     font-style: normal;
@@ -74,31 +84,39 @@ export const LogoContainer = styled.div`
     color: #ffffff;
     line-height: 25px;
     position: absolute;
-    left: 65px;
+    width: 90%;
+    height: 25px;
+    left: 85px;
+    top: 0px;
+  }
+  .cart {
+    position: absolute;
+    left: 70px;
     top: 10px;
+    bottom: 4.16%;
   }
   button {
     background-color: white;
     border: none;
-    font-size: 20px;
-    text-decoration: none;
-    color: black;
+    position: absolute;
+    height: 29px;
+    left: 92%;
+    top: 5.84%;
+    p {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 0%;
+    }
   }
 `;
 
 export const DropdownWrapper = styled.div`
   position: absolute;
-  right: 0%;
-  top: 62%;
-  right: 250%;
+  width: 15%;
+  height: 255px;
+  left: 86%;
+  top: 35px;
   z-index: 1;
-  background-color: white;
-  .victorIcon {
-    position: absolute;
-    left: 140px;
-    width: 10px;
-    top: -10px;
-    transform: ${(props) =>
-      props.dropdown === true ? "matrix(1, 0, 0, -1, 0, 0)" : null};
-  }
 `;

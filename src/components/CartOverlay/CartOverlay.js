@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Context from "../../context/context";
 // Styles
-import { Cart, Overlay } from "./CartOverlay.styles";
+import { Cart, Overlay, ProductsWrapper, Buttons } from "./CartOverlay.styles";
 // Components
 import SelectedProduct from "../SelectedProduct/SelectedProduct";
 import ProductsTotalPrice from "../ProductsTotalPrice/ProductsTotalPrice";
@@ -20,9 +20,7 @@ export default class CartOverlay extends Component {
     // first: get all products quantity
     const productsQuantity =
       selectedProducts &&
-      selectedProducts.reduce((total, curr) => {
-        return total + curr.productAmount;
-      }, 0);
+      selectedProducts.reduce((total, curr) => total + curr.productAmount, 0);
 
     return (
       <Overlay isopen={isopen}>
@@ -38,7 +36,7 @@ export default class CartOverlay extends Component {
               <p className="emptyCartText">Cart is empty!</p>
             )
           }
-          <div>
+          <ProductsWrapper>
             {
               // If user added products to cart
               selectedProducts &&
@@ -54,7 +52,7 @@ export default class CartOverlay extends Component {
                   }
                 )
             }
-          </div>
+          </ProductsWrapper>
           {<ProductsTotalPrice className="miniCart" />}
           {
             // Check if SelectedArray isn't empty and product has attributes
@@ -65,9 +63,11 @@ export default class CartOverlay extends Component {
                     <span>View Bag</span>
                   </button>
                 </Link>
-                <button>
-                  <span>Check out</span>
-                </button>
+                <Link to="/" onClick={() => setOverlay(false)}>
+                  <button>
+                    <span>Check out</span>
+                  </button>
+                </Link>
               </div>
             ) : null
           }

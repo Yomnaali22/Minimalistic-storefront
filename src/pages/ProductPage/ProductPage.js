@@ -48,6 +48,7 @@ export default class ProductPage extends Component {
     const { product, setSelectedProducts } = this.props;
     // All currencies
     const { currencies } = this.context;
+    console.log(product);
     // Product prices
     const prices = product.prices;
     // Selected Currency index

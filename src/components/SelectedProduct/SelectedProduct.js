@@ -23,6 +23,7 @@ export default class SelectedProduct extends Component {
       categories.products.find(
         (theProduct) => theProduct.id === selectedProduct.id
       );
+
     // Find product quantity with the matching id
     const productQuantity =
       selectedProducts &&
@@ -60,10 +61,9 @@ export default class SelectedProduct extends Component {
       });
       setSelectedProducts(filteredArr);
     };
-    // console.log(className, selectedProducts);
     return (
       selectedProducts.length !== 0 && (
-        <Wrapper className={className}>
+        <Wrapper>
           <ProductWrapper className={className}>
             {className === "cartPage" ? (
               <ImageSlider images={selectedProduct.gallery} />

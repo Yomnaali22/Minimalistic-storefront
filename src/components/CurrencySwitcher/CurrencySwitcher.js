@@ -6,32 +6,41 @@ import { Content } from "./CurrencySwitcher.styles";
 export default class CurrencySwitcher extends Component {
   static contextType = Context;
   render() {
-    // All currencies
     const { currencies } = this.context;
     const { product } = this.props;
     // Product prices
     const prices = product && product.prices;
+
     // Selected Currency index
-    const index = JSON.parse(localStorage.getItem("currency"));
+    const currencyIndex = JSON.parse(localStorage.getItem("currency"));
+
     // Find and return the amount and symbol that matchs the chosen currency
     const productPrice =
       prices &&
       currencies.length &&
       prices.find(
-        (price) => index && price.currency.label === currencies[index].label
+        // Check first if user select a currency
+        (price) =>
+          currencyIndex &&
+          currencies[currencyIndex].label === price.currency.label
       );
+
+    // Want to buy products
     const selectedProducts = JSON.parse(
       localStorage.getItem("SelectedProducts")
     );
-    JSON.parse(localStorage.getItem("SelectedProducts")) &&
+
+    // Update the want to buy product with new selected currency
+    selectedProducts &&
       selectedProducts.forEach((theproduct) => {
-        if (theproduct.id === (product && product.id) && index == false) {
-          theproduct.productPrice = prices[0].amount;
-        } else if (theproduct.id === (product && product.id) && index) {
+        if (theproduct.id === (product && product.id) && currencyIndex) {
           theproduct.productPrice = productPrice.amount;
         }
       });
+
+    // Update to the new version
     localStorage.setItem("SelectedProducts", JSON.stringify(selectedProducts));
+
     return productPrice ? (
       <Content>
         {
@@ -42,7 +51,7 @@ export default class CurrencySwitcher extends Component {
     ) : (
       <Content>
         {
-          // Default currency is set to $ if user didn't select a currency
+          // Default currency is set to $ if user didn't select a currency "currencyIndex"
           prices && `${prices[0].currency.symbol}${prices[0].amount}`
         }
       </Content>

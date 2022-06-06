@@ -54,7 +54,7 @@ export default class ProductsTotalPrice extends Component {
           selectedProducts && selectedProducts.length ? (
             <div className="totalPrice">
               <span className="total">Total: </span>
-              <span>{`${symbol || "$"}${totalPrice}`}</span>
+              <span>{`${symbol || "$"}${Math.round(totalPrice)}`}</span>
             </div>
           ) : null
         }
@@ -68,7 +68,7 @@ export default class ProductsTotalPrice extends Component {
             {` ${symbol || "$"}${Math.round(totalPrice / 21)}`}
           </Text>
           <Text>Quantity: {productsQuantity}</Text>
-          <Text>Total: {`${symbol || "$"}${totalPrice}`}</Text>
+          <Text>Total: {`${symbol || "$"}${Math.round(totalPrice)}`}</Text>
           <Link to="/">
             <Button
               onClick={() => {

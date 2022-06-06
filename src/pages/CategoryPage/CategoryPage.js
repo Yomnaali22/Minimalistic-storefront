@@ -2,14 +2,14 @@ import React, { Component } from "react";
 // Component
 import ProductCard from "./../../components/ProductCard/ProductCard";
 // Styles
-import { Wrapper, ProductsContainer, Content } from "./CategoryPage.styles";
+import { ProductsContainer, Content } from "./CategoryPage.styles";
 
 export default class CategoryPage extends Component {
   render() {
     const { name, products } = this.props.category;
     const categoryName = name.charAt(0).toUpperCase() + name.slice(1);
     return (
-      <Wrapper>
+      <>
         {categoryName === "All" ? (
           <Content>{`${categoryName} Categories`}</Content>
         ) : (
@@ -23,7 +23,7 @@ export default class CategoryPage extends Component {
             ))
           }
         </ProductsContainer>
-      </Wrapper>
+      </>
     );
   }
 }
