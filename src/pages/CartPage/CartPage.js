@@ -6,6 +6,7 @@ import SelectedProduct from "../../components/SelectedProduct/SelectedProduct";
 import ProductsTotalPrice from "../../components/ProductsTotalPrice/ProductsTotalPrice";
 export default class CartPage extends Component {
   render() {
+    // Want to buy products
     const selectedProducts = JSON.parse(
       localStorage.getItem("SelectedProducts")
     );

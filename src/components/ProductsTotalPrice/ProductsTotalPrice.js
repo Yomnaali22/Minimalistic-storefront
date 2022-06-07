@@ -52,7 +52,7 @@ export default class ProductsTotalPrice extends Component {
       <>
         {
           // Check if SelectedArray isn't empty and product has attributes
-          selectedProducts && selectedProducts.length ? (
+          selectedProducts && selectedProducts.length !== 0 ? (
             <div className="totalPrice">
               <span className="total">Total: </span>
               <span>{`${currencySymbol || "$"}${Math.round(totalPrice)}`}</span>
@@ -61,12 +61,11 @@ export default class ProductsTotalPrice extends Component {
         }
       </>
     ) : (
-      // Check if user selected products
       selectedProducts && selectedProducts.length !== 0 && (
         <Content>
           <Text>
             Tax 21%:
-            {` ${currencySymbol || "$"}${Math.round(totalPrice / 21)}`}
+            {` ${currencySymbol || "$"}${Math.round((21 / 100) * totalPrice)}`}
           </Text>
           <Text>Quantity: {productsQuantity}</Text>
           <Text>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // Component
 import ProductCard from "./../../components/ProductCard/ProductCard";
 // Styles
-import { ProductsContainer, Content } from "./CategoryPage.styles";
+import { Wrapper, Content } from "./CategoryPage.styles";
 
 export default class CategoryPage extends Component {
   render() {
@@ -15,14 +15,14 @@ export default class CategoryPage extends Component {
         ) : (
           <Content>{`${categoryName} Category`}</Content>
         )}
-        <ProductsContainer>
+        <Wrapper>
           {
             // Render products
             products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))
           }
-        </ProductsContainer>
+        </Wrapper>
       </>
     );
   }

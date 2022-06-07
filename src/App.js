@@ -21,6 +21,8 @@ export default class App extends Component {
     selectedProducts:
       JSON.parse(localStorage.getItem("SelectedProducts")) || [],
   };
+
+  // Fetch Data
   async componentDidMount() {
     try {
       const categoriesAndcurrencies = await Promise.all([
@@ -38,7 +40,7 @@ export default class App extends Component {
     }
   }
 
-  // Product
+  // Set Product
   setProduct(product) {
     this.setState({
       product: {
@@ -46,14 +48,15 @@ export default class App extends Component {
       },
     });
   }
-  // Set chosen currency state in localstorage
+
+  // Set selected currency in localStorage
   setCurrency(index) {
     this.setState({
       selectedCurrency: localStorage.setItem("currency", index),
     });
   }
 
-  // Want to buy products
+  // Set Want to buy products in localStorage
   setSelectedProducts(products) {
     this.setState({
       selectedProducts:

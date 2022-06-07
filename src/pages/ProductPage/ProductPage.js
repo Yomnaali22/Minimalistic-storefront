@@ -30,7 +30,7 @@ export default class ProductPage extends Component {
     }
   }
 
-  // Set the attributes of the product
+  // Set product attributes in localStorage
   setAttributes(attributes) {
     this.setState({
       SelectedAttributes: localStorage.setItem(
@@ -44,12 +44,9 @@ export default class ProductPage extends Component {
     const { product, setSelectedProducts } = this.props;
     // All currencies
     const { currencies } = this.context;
-    console.log(product);
-    // Product prices
     const prices = product.prices;
 
     const selectedCurrencyIndex = JSON.parse(localStorage.getItem("currency"));
-
     // Find and return the amount and symbol that matchs the chosen currency
     const productPrice =
       prices &&
@@ -68,23 +65,27 @@ export default class ProductPage extends Component {
       )
         ? JSON.parse(localStorage.getItem("SelectedProducts"))
         : [];
-      // Count the occurance of an Object
+      // Count the occurance of each product
       const count = selectedProducts.reduce(
         (initialValue, currentProduct) =>
           currentProduct.id === product.id ? ++initialValue : initialValue,
         0
       );
-      // All Selected Attributes of selected Products
+
+      // Want to buy products attributes
       const selectedAttributes = JSON.parse(
         localStorage.getItem("SelectedAttributes")
       );
-      // Check if the product we're adding the cart has attributes set
+      // Chech if the selected product has attributes
       const productSelectedAttribute =
         selectedAttributes &&
         selectedAttributes.some((attribute) => attribute.id === product.id);
 
-      // Don't add product to cart unless the product doesn't exist and has chosen attributes
-      if (!count && productSelectedAttribute) {
+      // Only Add products with Selected attributes to cart
+      if (
+        (!count && productSelectedAttribute) ||
+        product.attributes.length === 0
+      ) {
         selectedProducts.push({
           name: product.name,
           brand: product.brand,
@@ -93,22 +94,8 @@ export default class ProductPage extends Component {
           selectedAttributes: selectedAttributes && selectedAttributes,
           productPrice:
             selectedCurrencyIndex === 0 || !selectedCurrencyIndex
-              ? product.prices[0].amount
-              : productPrice,
-          productAmount: 1,
-        });
-        setSelectedProducts(selectedProducts);
-        // If the product has no attributes
-      } else if (!count && product.attributes.length === 0) {
-        selectedProducts.push({
-          name: product.name,
-          brand: product.brand,
-          id: product.id,
-          gallery: product.gallery,
-          productPrice:
-            selectedCurrencyIndex === 0 || !selectedCurrencyIndex
-              ? product.prices[0].amount
-              : productPrice,
+              ? Math.round(product.prices[0].amount)
+              : Math.round(productPrice),
           productAmount: 1,
         });
         setSelectedProducts(selectedProducts);

@@ -10,7 +10,7 @@ export default class CurrencyDropdown extends Component {
         <>
           <List className={`${dropdown && openOverlay ? "dropdown" : ""}`}>
             {
-              // Rendering All Currencies
+              // Rendering Currencies
               currencies.map((currency, index) => {
                 return (
                   <ListItems onClick={() => setCurrency(index)} key={index}>

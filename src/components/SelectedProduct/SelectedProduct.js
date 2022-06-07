@@ -109,7 +109,7 @@ export default class SelectedProduct extends Component {
                               type={attribute.type}
                               item={item}
                               product={product}
-                              className="selectedProduct"
+                              selectedProduct="selectedProduct"
                               cartPage={className}
                             />
                           );

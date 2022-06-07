@@ -2,22 +2,23 @@ import React, { Component } from "react";
 import { Button, ButtonWrapper, Img } from "./ImageSlider.styles";
 export default class ImageSlider extends Component {
   state = { index: 0 };
+  // Next Image
+  nextSlide = () => {
+    const { images } = this.props;
+    const { index } = this.state;
+    this.setState({
+      index: index === images.length - 1 ? 0 : index + 1,
+    });
+  };
+  // Previous Image
+  prevSlide = () => {
+    const { images } = this.props;
+    const { index } = this.state;
+    this.setState({ index: index === 0 ? images.length - 1 : index - 1 });
+  };
   render() {
     const { images } = this.props;
     const { index } = this.state;
-
-    // Next Image
-    const nextSlide = () => {
-      this.setState({
-        index: index === images.length - 1 ? 0 : index + 1,
-      });
-    };
-
-    // Previous Image
-    const prevSlide = () => {
-      this.setState({ index: index === 0 ? images.length - 1 : index - 1 });
-    };
-
     return (
       <>
         <Img src={images[index]} />
@@ -26,7 +27,7 @@ export default class ImageSlider extends Component {
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                nextSlide();
+                this.nextSlide();
               }}
             >
               {`>`}
@@ -34,7 +35,7 @@ export default class ImageSlider extends Component {
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                prevSlide();
+                this.prevSlide();
               }}
             >
               {`<`}

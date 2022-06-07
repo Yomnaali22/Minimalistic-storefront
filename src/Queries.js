@@ -14,7 +14,7 @@ query {
           symbol
         }
         amount
-      }attributes {
+      } attributes {
         name
         type
         items{

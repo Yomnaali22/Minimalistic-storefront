@@ -15,13 +15,12 @@ export const Wrapper = styled(ProductWrapper)`
     height: 300px;
     margin-top: 10px;
   }
-
   .button {
     margin-top: 10px;
     margin-right: 20px;
     width: 40px;
     right: 200px;
-    gap: 100px;
+    gap: 119px;
     button {
       background-color: var(--primaryWhite);
       box-sizing: border-box;
@@ -69,7 +68,7 @@ export const Text = styled.div`
 export const Button = styled.button`
   width: 279px;
   height: 43px;
-  background: #5ece7b;
+  background: var(--primaryGreen);
   border: none;
   span {
     width: 48px;

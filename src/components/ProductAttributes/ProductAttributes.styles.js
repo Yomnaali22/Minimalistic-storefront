@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Swatch = styled.div`
   ${(props) =>
-    props.color.type === "swatch" && props.color.className
+    props.color.type === "swatch" && props.color.selectedProduct
       ? ` 
   display: inline-block;
   margin: 0px 2px;
@@ -23,7 +23,7 @@ export const Swatch = styled.div`
       `}
   ${(props) =>
     props.color.type === "text" &&
-    props.color.className &&
+    props.color.selectedProduct &&
     ` 
   min-width: 20%;
   max-width: 25%; 
@@ -65,7 +65,7 @@ export const Text = styled.li`
   position: relative;
   text-align: center;
   ${(props) =>
-    props.color.className
+    props.color.selectedProduct
       ? `
   margin: 5px 1px;
   width: 100%; 

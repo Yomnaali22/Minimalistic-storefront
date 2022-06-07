@@ -40,10 +40,10 @@ export const ProductWrapper = styled.div`
       props.cartPage &&
       `
     position: absolute;
-width: 45px;
-height: 288px;
-left: 1071px;
-top: 617px;
+    width: 45px;
+    height: 288px;
+    left: 1071px;
+    top: 617px;
     
     `}
     .productAmount {
@@ -71,7 +71,7 @@ export const Text = styled.div`
   align-items: flex-start;
   gap: 2px;
   width: 75%;
-  height: 320px;
+  height: 400px;
   font-family: 'Raleway';
   .brand,
   .name,

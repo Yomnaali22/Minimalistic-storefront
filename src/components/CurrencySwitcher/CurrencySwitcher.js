@@ -13,36 +13,36 @@ export default class CurrencySwitcher extends Component {
 
     const selectedCurrencyIndex = JSON.parse(localStorage.getItem("currency"));
 
+    // Want to buy products
+    const selectedProducts = JSON.parse(
+      localStorage.getItem("SelectedProducts")
+    );
+
     // Find and return the amount and symbol that matchs the chosen currency
     const productPrice =
       prices &&
       currencies.length &&
       prices.find(
-        // Check first if user select a currency
         (price) =>
           selectedCurrencyIndex &&
           currencies[selectedCurrencyIndex].label === price.currency.label
       );
-
-    // Want to buy products
-    const selectedProducts = JSON.parse(
-      localStorage.getItem("SelectedProducts")
-    );
 
     // Update the want to buy product with new selected currency
     selectedProducts &&
       selectedProducts.forEach((theproduct) => {
         if (
           theproduct.id === (product && product.id) &&
-          selectedCurrencyIndex
+          selectedCurrencyIndex &&
+          productPrice
         ) {
           theproduct.productPrice = productPrice.amount;
+        } else if (theproduct.id === (product && product.id) && !productPrice) {
+          theproduct.productPrice = prices[0].amount;
         }
       });
 
-    // Update to the new version
     localStorage.setItem("SelectedProducts", JSON.stringify(selectedProducts));
-
     return productPrice ? (
       <Content>
         {

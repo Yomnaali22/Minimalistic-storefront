@@ -43,7 +43,7 @@ export const Content = styled.div`
   .price {
     font-style: normal;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     text-align: left;
   }
 `;

@@ -11,9 +11,10 @@ export const Wrapper = styled.div`
 
 export const Img = styled.img`
   position: relative;
-  width: ${(props) => {
-    return props.productId === "jacket-canada-goosee" ||
-      props.productId === "huarache-x-stussy-le"
+
+  width: ${({ productId }) => {
+    return productId === "jacket-canada-goosee" ||
+      productId === "huarache-x-stussy-le"
       ? "32%"
       : "47%";
   }};

@@ -10,7 +10,7 @@ export default class ProductAttributes extends Component {
       setAttributes,
       type,
       attributeName,
-      className,
+      selectedProduct,
       cartPage,
     } = this.props;
 
@@ -65,7 +65,7 @@ export default class ProductAttributes extends Component {
           selectedAttribute: selectedAttribute,
           color: item.value,
           type: type,
-          className: className,
+          selectedProduct,
           cartPage,
         }}
         onClick={() => setSelectedAttributes(item)}
@@ -73,7 +73,7 @@ export default class ProductAttributes extends Component {
         {
           <Text
             color={{
-              className: className,
+              selectedProduct,
               cartPage,
             }}
           >
