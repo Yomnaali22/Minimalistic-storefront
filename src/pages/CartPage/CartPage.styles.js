@@ -3,31 +3,28 @@ import { ProductWrapper } from "../../components/SelectedProduct/SelectedProduct
 
 export const Wrapper = styled(ProductWrapper)`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 95%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   position: absolute;
   top: 220px;
+  right: 0;
+  left: 0;
   img {
-    left: 79.17%;
-    right: 6.94%;
-    top: 44.23%;
-    bottom: 35.13%;
-    width: 10%;
+    width: 15%;
+    height: 300px;
+    margin-top: 10px;
   }
 
   .button {
-    display: flex;
-    flex-direction: column;
-    gap: 55px;
-    margin-right: -70px;
-    width: 35px;
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 40px;
+    right: 200px;
+    gap: 100px;
     button {
+      background-color: var(--primaryWhite);
       box-sizing: border-box;
-      position: relative;
-      left: -210%;
-      top: 0%;
-      bottom: 0%;
       text {
         text-align: center;
       }
@@ -36,7 +33,7 @@ export const Wrapper = styled(ProductWrapper)`
 `;
 
 export const Headline = styled.h1`
-  left: 120px;
+  left: 80px;
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
@@ -54,14 +51,15 @@ export const Headline = styled.h1`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 40px 0px;
-  gap: 8px;
-  width: 93.5%;
+  justify-content: flex-start;
+  padding: 10px;
+  gap: 16px;
+  position: relative;
+  top: 30px;
+  right: 38%;
 `;
 
 export const Text = styled.div`
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
@@ -69,12 +67,10 @@ export const Text = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 16px 32px;
-  width: 299%;
+  width: 279px;
   height: 43px;
   background: #5ece7b;
   border: none;
-  margin-top: 25px;
   span {
     width: 48px;
     height: 17px;
@@ -82,6 +78,6 @@ export const Button = styled.button`
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    color: #ffffff;
+    color: var(--primaryWhite);
   }
 `;

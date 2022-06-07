@@ -1,14 +1,28 @@
 import styled from "styled-components";
 
-export const Button = styled.a`
-  position: relative;
-  width: 24px;
-  left: 178px;
-  top: 166px;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+  position: absolute;
+  box-sizing: border-box;
+  width: 56px;
   height: 24px;
-  background-color: rgba(0, 0, 0, 0.6);
+  left: 1715px;
+`;
+
+export const Button = styled.button`
+  position: relative;
+  top: 260px;
+  border: none;
+  width: 24px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.7);
   color: white;
-  margin-right: 5px;
-  text-align: center;
-  text-decoration: none;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+`;
+
+export const Img = styled.img`
+  width: 400%;
 `;

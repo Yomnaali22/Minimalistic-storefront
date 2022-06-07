@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import Context from "./../../context/context";
 // Styles
-import {
-  Wrapper,
-  ProductWrapper,
-  Text,
-  Content,
-} from "./SelectedProduct.styles";
+import { Wrapper, ProductWrapper, Text } from "./SelectedProduct.styles";
 // Components
 import CurrencySwitcher from "../CurrencySwitcher/CurrencySwitcher";
 import ProductAttributes from "../ProductAttributes/ProductAttributes";
-import SimpleImageSlider from "react-simple-image-slider";
 import ImageSlider from "../ImageSlider/ImageSlider";
 
 export default class SelectedProduct extends Component {
@@ -66,30 +60,34 @@ export default class SelectedProduct extends Component {
         <Wrapper>
           <ProductWrapper className={className}>
             {className === "cartPage" ? (
-              <ImageSlider images={selectedProduct.gallery} />
+              <ImageSlider
+                images={selectedProduct.gallery}
+                className="slider"
+              />
             ) : (
-              <img src={selectedProduct.gallery[0]} />
+              <img
+                src={selectedProduct.gallery[0]}
+                alt={selectedProducts.name}
+              />
             )}
             <div className="button">
-              <a
-                href=""
+              <button
                 onClick={(e) => {
                   e.preventDefault();
                   increasProductAmount();
                 }}
               >
                 +
-              </a>
-              <span className="amount">{productQuantity}</span>
-              <a
-                href=""
+              </button>
+              <span className="productAmount">{productQuantity}</span>
+              <button
                 onClick={(e) => {
                   e.preventDefault();
                   decreaseProductAmount();
                 }}
               >
                 -
-              </a>
+              </button>
             </div>
             <Text className={className}>
               <span className="brand">{selectedProduct.brand}</span>

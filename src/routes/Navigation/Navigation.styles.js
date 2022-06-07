@@ -5,7 +5,7 @@ const handleColor = (props) =>
 
 export const Header = styled.div`
   position: absolute;
-  width: 100%;
+  width: 91%;
   height: 80px;
   .nav-link {
     text-decoration: none;
@@ -56,7 +56,7 @@ export const LogoIcon = styled.img`
   position: absolute;
   width: 30%;
   height: 41px;
-  left: 35%;
+  left: 40%;
 `;
 
 export const Actions = styled.div`

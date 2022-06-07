@@ -3,12 +3,9 @@ import styled from "styled-components";
 export const ProductsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex-wrap: wrap;
-  position: absolute;
-  left: 5%;
-  min-width: 50%;
-  max-width: 100%;
+  margin-left: 5%;
+  width: 100%;
 `;
 
 export const Content = styled.h2`

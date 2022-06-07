@@ -6,26 +6,29 @@ export const Swatch = styled.div`
       ? ` 
   display: inline-block;
   margin: 0px 2px;
-  width: 10%; 
+  max-width: 20%;
+  min-width: 12%;
   height: 25px;
+
       `
       : `
-      display: inline-block;
-  //  position: relative;
-  //left: -1px;
-  // top: 2px;
-  margin: 0px 2px;
-  width: 10%;
-  height: 50px;
+
+  display: inline-block;
+  margin: 0px 3px;
+  max-width: 54%;
+  min-width: 15%;
+  min-height: 50px;
+  max-height: 55px;
+
       `}
   ${(props) =>
     props.color.type === "text" &&
     props.color.className &&
     ` 
-
-  width: 20%; 
-  max-width: 50%;
-  height: 30px;
+  min-width: 20%;
+  max-width: 25%; 
+  min-height: 20px;
+  max-height: 25px;
       `}
   background-color: ${({ color }) => color.color};
   border: ${(props) => {
@@ -40,17 +43,22 @@ export const Swatch = styled.div`
   background-color: ${(props) =>
     props.color.selectedAttribute && props.color.type === "text" && "black"};
   border: ${(props) => props.color.type === "text" && "1px solid black"};
-  ${(props) =>
-    props.color.cartPage &&
+
+  ${(props) => {
+    return (
+      props.color.cartPage &&
+      props.color.type === "text" &&
+      `
+    width: 20%;
+    display: inline-block;
+    margin: 0px 3px;
+    max-width: 50%;
+    min-width: 20%;
+    min-height: 50px;
+    max-height: 55px;
     `
-    width: 18%;
-    `}
-  ${(props) =>
-    props.color.cartPage &&
-    props.color.type === "swatch" &&
-    `
-    width: 10%;
-    `}
+    );
+  }}
 `;
 export const Text = styled.li`
   list-style: none;
@@ -59,17 +67,16 @@ export const Text = styled.li`
   ${(props) =>
     props.color.className
       ? `
-
-
   margin: 5px 1px;
   width: 100%; 
   height: 25px;
-  font-size: 14px;
+  font-size: 12px;
   `
       : `
-  font-size: 17px;
+  font-size: 16px;
   top: 15px;
   left: 0px;
+  font-weight: 400;
   `}
   ${(props) =>
     props.color.cartPage &&
@@ -79,5 +86,7 @@ export const Text = styled.li`
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
+    position: relative;
+    top: 10px;
     `}
 `;

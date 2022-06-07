@@ -14,9 +14,7 @@ export const Wrapper = styled.div`
   `
     );
   }}
-  ${(props) => props.cartPage && `gap: 0px;`}
 `;
-
 export const ProductWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
@@ -27,11 +25,9 @@ export const ProductWrapper = styled.div`
     `1px solid #E5E5E5;
     width: 1850px;
     `};
-
   img {
     width: 121px;
     height: 190px;
-    ${(props) => props.className && `margin-top: 10px`}
   }
   .button {
     display: flex;
@@ -40,21 +36,28 @@ export const ProductWrapper = styled.div`
     gap: 50px;
     width: 10%;
     margin-right: 10px;
-
-    a {
-      background-color: black;
+    ${(props) =>
+      props.cartPage &&
+      `
+    position: absolute;
+width: 45px;
+height: 288px;
+left: 1071px;
+top: 617px;
+    
+    `}
+    .productAmount {
+      position: relative;
+      left: 10px;
+    }
+    button {
       border: 0.5px solid black;
-      background-color: white;
       height: 30px;
       text-decoration: none;
       text-align: center;
       font-size: 20px;
       position: relative;
-      ${(props) =>
-        props.className &&
-        `margin-top: 10px;
-        right: 24px;
-    `}
+      left: 0;
     }
   }
 `;
@@ -66,13 +69,15 @@ export const Text = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 80%;
+  gap: 2px;
+  width: 75%;
+  height: 320px;
+  font-family: 'Raleway';
   .brand,
   .name,
   .price {
     margin-bottom: 10px;
     font-style: normal;
-    font-family: 'Raleway';
     margin-top: 10px;
   }
   .brand{
@@ -99,23 +104,27 @@ line-height: 24px;
   font-weight: 700;
   font-size: 18px;
   width: 20%;
+  height: 300px;
+    
+  .attributeName{
+      margin: 3px 0px;
+    }
 }
 `
       : `
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
   width: 55%;
-  .brand,
-  .name,
-  .price {
-    margin-bottom: 10px;
-  }
+  gap: 20px;
   .attributes {
     width: 100%;
     display: inline-block;
     align-items: left;
     text-transform: uppercase;
+  
+    .attributeName{
+      margin: 5px 0px;
+    }
   }`}
 `;

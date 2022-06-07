@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Routes, Route } from "react-router-dom";
 import Context from "./context/context";
 import API from "./api";
-import { GlobalStyle, Wrapper } from "./GlobalStyle";
+import { GlobalStyle } from "./GlobalStyle";
 // Queries
 import { currenciesQuery, categoriesQuery } from "./Queries";
 // Components
@@ -36,7 +36,6 @@ export default class App extends Component {
     } catch (error) {
       console.log("error", error);
     }
-    console.log("didmount");
   }
 
   // Product
@@ -98,7 +97,7 @@ export default class App extends Component {
                 }
               />
               {
-                // Rendering each category
+                // Rendering each Category
                 categories.map((category) => {
                   const categoryName = category.name;
                   return categoryName === "all" ? (

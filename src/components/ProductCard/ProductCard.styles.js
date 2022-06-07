@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
   margin-bottom: 50px;
   background: var(--primaryWhite);
   text-decoration: none;
-
   :hover {
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
     padding: 16px;
@@ -19,9 +18,9 @@ export const Wrapper = styled.div`
   }
   .outofstock {
     position: absolute;
-    left: 25.42%;
+    left: 33.42%;
     right: 25.71%;
-    top: 44.24%;
+    top: 48.24%;
     bottom: 43.94%;
     font-style: normal;
     font-family: "Raleway";
@@ -32,34 +31,32 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  width: 460px;
+  width: 100%;
   height: 550px;
-
+  position: relative;
+  color: var(--primaryBlack);
   h1 {
     font-style: normal;
     font-weight: 300;
     font-size: 30px;
-    color: var(--primaryBlack);
   }
   .price {
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     text-align: left;
-    color: var(--primaryBlack);
   }
 `;
 
 export const Image = styled.img`
-  width: 468px;
-  height: 550px;
-  opacity: ${(props) => (props.inStock === false ? "0.5" : null)};
+  width: 100%;
+  height: 540px;
+  opacity: ${(props) => (!props.inStock ? "0.5" : null)};
 `;
 
 export const InCartLogo = styled.img`
   position: absolute;
   left: 80%;
   right: 0%;
-  top: 80%;
-  bottom: 0%;
+  top: -10%;
 `;

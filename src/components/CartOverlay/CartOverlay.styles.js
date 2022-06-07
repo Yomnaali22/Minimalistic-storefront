@@ -20,12 +20,12 @@ export const Overlay = styled.div`
 export const Cart = styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: left;
   align-items: center;
   padding: 32px 16px;
   gap: 32px;
   position: relative;
-  width: 20%;
+  max-width: 20%;
+  min-width: 20%;
   height: 677px;
   left: 75%;
   top: 0px;
@@ -50,17 +50,20 @@ export const Cart = styled.div`
       font-weight: 500;
     }
   }
-  //TODO: continue solving the buttons issue
   .buttons {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding: 0px;
     gap: 12px;
+    max-width: 100%;
+    min-width: 50%;
     button {
+      min-height: 50px;
       background-color: var(--primaryWhite);
       color: var(--primaryBlack);
-      width: 100%;
+      max-width: 100%;
+      min-width: 50%;
       padding: 16px 32px;
       height: 43px;
       position: relative;
@@ -82,7 +85,7 @@ export const Cart = styled.div`
   }
 
   .totalPrice {
-    //  width: 289px;
+    max-width: 100%;
     height: 28px;
     display: flex;
     flex-direction: row;
@@ -102,14 +105,12 @@ export const Cart = styled.div`
 `;
 
 export const ProductsWrapper = styled.div`
-  // background-color: blue;
   display: flex;
   flex-direction: column;
   padding: 0px;
   gap: 40px;
   width: 98%;
   height: 420px;
-
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none;

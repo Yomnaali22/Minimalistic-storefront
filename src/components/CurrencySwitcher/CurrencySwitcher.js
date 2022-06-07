@@ -11,8 +11,7 @@ export default class CurrencySwitcher extends Component {
     // Product prices
     const prices = product && product.prices;
 
-    // Selected Currency index
-    const currencyIndex = JSON.parse(localStorage.getItem("currency"));
+    const selectedCurrencyIndex = JSON.parse(localStorage.getItem("currency"));
 
     // Find and return the amount and symbol that matchs the chosen currency
     const productPrice =
@@ -21,8 +20,8 @@ export default class CurrencySwitcher extends Component {
       prices.find(
         // Check first if user select a currency
         (price) =>
-          currencyIndex &&
-          currencies[currencyIndex].label === price.currency.label
+          selectedCurrencyIndex &&
+          currencies[selectedCurrencyIndex].label === price.currency.label
       );
 
     // Want to buy products
@@ -33,7 +32,10 @@ export default class CurrencySwitcher extends Component {
     // Update the want to buy product with new selected currency
     selectedProducts &&
       selectedProducts.forEach((theproduct) => {
-        if (theproduct.id === (product && product.id) && currencyIndex) {
+        if (
+          theproduct.id === (product && product.id) &&
+          selectedCurrencyIndex
+        ) {
           theproduct.productPrice = productPrice.amount;
         }
       });
@@ -45,14 +47,15 @@ export default class CurrencySwitcher extends Component {
       <Content>
         {
           // The chosen currency
-          `${productPrice.currency.symbol}${productPrice.amount}`
+          `${productPrice.currency.symbol}${Math.round(productPrice.amount)}`
         }
       </Content>
     ) : (
       <Content>
         {
           // Default currency is set to $ if user didn't select a currency "currencyIndex"
-          prices && `${prices[0].currency.symbol}${prices[0].amount}`
+          prices &&
+            `${prices[0].currency.symbol}${Math.round(prices[0].amount)}`
         }
       </Content>
     );

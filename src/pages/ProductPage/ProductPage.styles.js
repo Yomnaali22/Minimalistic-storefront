@@ -2,48 +2,52 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: absolute;
-  left: 50px;
-  top: -10px;
+  display: flex;
+  flex-direction: row;
+  top: 150px;
+  right: 100px;
+  width: 100%;
 `;
 
 export const Img = styled.img`
-  position: absolute;
-  left: 300px;
-  right: 0px;
-  top: 200px;
-  bottom: 0px;
+  position: relative;
   width: ${(props) => {
     return props.productId === "jacket-canada-goosee" ||
       props.productId === "huarache-x-stussy-le"
-      ? "550px"
-      : "800px";
+      ? "32%"
+      : "47%";
+  }};
+
+  height: ${(props) => {
+    return props.productId === "jacket-canada-goosee" ||
+      props.productId === "huarache-x-stussy-le"
+      ? "880px"
+      : "900px";
   }};
 `;
 
 export const Gallery = styled.div`
-  position: absolute;
-  width: 79px;
-  height: 100px;
-  left: 130px;
-  top: 120px;
+  position: relative;
+  left: 22%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 34%;
+
   img {
-    position: relative;
-    width: 120px;
-    height: 139px;
-    top: 80px;
+    width: 20%;
+    height: ${(props) => {
+      return props.productId === "jacket-canada-goosee" ||
+        props.productId === "huarache-x-stussy-le"
+        ? "129px"
+        : "150px";
+    }};
   }
 `;
 
 export const Content = styled.div`
-  position: absolute;
-  width: 550px;
-  height: 595px;
-  top: 200px;
-  left: ${(props) =>
-    props.productId === "jacket-canada-goosee" ||
-    props.productId === "huarache-x-stussy-le"
-      ? "970px"
-      : "1100px"};
+  width: 25%;
+  margin-left: 50px;
   .brandName {
     font-family: "Raleway";
     font-style: normal;
@@ -76,7 +80,7 @@ export const Content = styled.div`
     align-items: center;
     color: var(--primaryWhite);
     padding: 16px 32px;
-    width: 292px;
+    width: 90%;
     height: 52px;
     left: 0px;
     font-size: 17px;

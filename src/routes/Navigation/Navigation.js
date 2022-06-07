@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Outlet, Link } from "react-router-dom";
 import API from "./../../api";
 import { categoriesNamesQuery } from "../../Queries";
-// Icons
+// Logos
 import GreenLogo from "./../../assets/Logo.svg";
 import CartIcon from "./../../assets/Cart.svg";
 import ArrowIcon from "./../../assets/Victor.svg";
@@ -27,7 +27,7 @@ export default class Navigation extends Component {
     categoryIndex: localStorage.getItem("categoryIndex"),
   };
 
-  // Overlay of the mini cart
+  // Show or hide overlay
   setOverlay(boolean) {
     this.setState({
       openOverlay: boolean,
@@ -47,7 +47,7 @@ export default class Navigation extends Component {
       localStorage.setItem("categoryIndex", 0);
     }
 
-    // Close both overlay or currency component on scrolling
+    // Close the overlay or currencies on scroll
     window.addEventListener("scroll", () => {
       const { openOverlay, dropdown } = this.state;
       if (openOverlay || dropdown) {
@@ -63,10 +63,13 @@ export default class Navigation extends Component {
     const currencies = this.props.currencies;
     const setCurrency = this.props.setCurrency;
     // Selected currency index
-    const index = localStorage.getItem("currency");
+    const selectedCurrencyIndex = localStorage.getItem("currency");
+    // Selected Category name index
     const categoryindex = localStorage.getItem("categoryIndex");
     const name =
       categoriesNames[categoryindex] && categoriesNames[categoryindex].name;
+
+    // want to buy products
     const selectedProducts = JSON.parse(
       localStorage.getItem("SelectedProducts")
     );
@@ -81,36 +84,30 @@ export default class Navigation extends Component {
       <Header dropdown={dropdown}>
         <LogoIcon src={GreenLogo} className="greenIcon" />
         <Nav>
-          {
-            // Category names
-            categoriesNames.map((category, index) => {
-              const categoryName = category.name;
-              return (
-                <Link
-                  key={categoryName}
-                  to={`/${categoryName !== "all" ? categoryName : ""}`}
-                  className="nav-link"
-                  key={categoryName}
-                  onClick={() => {
-                    return this.setState({
-                      category_Name: localStorage.setItem(
-                        "categoryIndex",
-                        index
-                      ),
-                    });
-                  }}
+          {categoriesNames.map((category, index) => {
+            const categoryName = category.name;
+            return (
+              <Link
+                key={categoryName}
+                to={`/${categoryName === "all" ? "" : categoryName}`}
+                className="nav-link"
+                key={categoryName}
+                onClick={() => {
+                  return this.setState({
+                    category_Name: localStorage.setItem("categoryIndex", index),
+                  });
+                }}
+              >
+                <Content
+                  category_name={name}
+                  categoriesNames={categoriesNames}
+                  index={index}
                 >
-                  <Content
-                    category_name={name}
-                    categoriesNames={categoriesNames}
-                    index={index}
-                  >
-                    {categoryName}
-                  </Content>
-                </Link>
-              );
-            })
-          }
+                  {categoryName}
+                </Content>
+              </Link>
+            );
+          })}
         </Nav>
         <Actions>
           <button>
@@ -129,21 +126,25 @@ export default class Navigation extends Component {
             >
               {
                 // Currency change to the selected one
-                currencies[index] && currencies[index].symbol
-                  ? currencies[index].symbol
+                currencies[selectedCurrencyIndex] &&
+                currencies[selectedCurrencyIndex].symbol
+                  ? currencies[selectedCurrencyIndex].symbol
                   : "$"
               }
             </p>
           </button>
           <DropdownWrapper dropdown={!dropdown} isOpen={!openOverlay}>
-            {dropdown ? (
-              <CurrencyDropdown
-                currencies={currencies}
-                setCurrency={setCurrency.bind(this)}
-                dropdown={dropdown}
-                openOverlay={openOverlay}
-              />
-            ) : null}
+            {
+              // Show currencies
+              dropdown ? (
+                <CurrencyDropdown
+                  currencies={currencies}
+                  setCurrency={setCurrency.bind(this)}
+                  dropdown={dropdown}
+                  openOverlay={openOverlay}
+                />
+              ) : null
+            }
           </DropdownWrapper>
 
           {

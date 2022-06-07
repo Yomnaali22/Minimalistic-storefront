@@ -13,13 +13,11 @@ import ProductAttributes from "../../components/ProductAttributes/ProductAttribu
 export default class ProductPage extends Component {
   static contextType = Context;
   state = {
-    increaseAmountOfProduct: localStorage.getItem("amount"),
-    product: {
-      SelectedAttributes:
-        [] || JSON.parse(localStorage.getItem("SelectedAttributes")),
-    },
+    increaseProductQuantity: localStorage.getItem("amount"),
+    selectedAttributes:
+      [] || JSON.parse(localStorage.getItem("SelectedAttributes")),
   };
-  // Get the product data
+  // Get Product
   async componentDidMount() {
     try {
       const product = await API.getProduct(
@@ -35,12 +33,10 @@ export default class ProductPage extends Component {
   // Set the attributes of the product
   setAttributes(attributes) {
     this.setState({
-      product: {
-        SelectedAttributes: localStorage.setItem(
-          "SelectedAttributes",
-          JSON.stringify(attributes)
-        ),
-      },
+      SelectedAttributes: localStorage.setItem(
+        "SelectedAttributes",
+        JSON.stringify(attributes)
+      ),
     });
   }
 
@@ -51,20 +47,20 @@ export default class ProductPage extends Component {
     console.log(product);
     // Product prices
     const prices = product.prices;
-    // Selected Currency index
-    const index = JSON.parse(localStorage.getItem("currency"));
+
+    const selectedCurrencyIndex = JSON.parse(localStorage.getItem("currency"));
 
     // Find and return the amount and symbol that matchs the chosen currency
     const productPrice =
       prices &&
       currencies.length &&
       prices.find(
-        (price) => index && price.currency.label === currencies[index].label
+        (price) =>
+          selectedCurrencyIndex &&
+          price.currency.label === currencies[selectedCurrencyIndex].label
       );
 
-    /**
-     * Add products to cart
-     */
+    // Add Products to cart
     const WantToBuyProducts = (product) => {
       // Want to buy products
       const selectedProducts = JSON.parse(
@@ -85,7 +81,7 @@ export default class ProductPage extends Component {
       // Check if the product we're adding the cart has attributes set
       const productSelectedAttribute =
         selectedAttributes &&
-        selectedAttributes.some((pro) => pro.id === product.id);
+        selectedAttributes.some((attribute) => attribute.id === product.id);
 
       // Don't add product to cart unless the product doesn't exist and has chosen attributes
       if (!count && productSelectedAttribute) {
@@ -96,7 +92,7 @@ export default class ProductPage extends Component {
           gallery: product.gallery,
           selectedAttributes: selectedAttributes && selectedAttributes,
           productPrice:
-            index === 0 || index === null
+            selectedCurrencyIndex === 0 || !selectedCurrencyIndex
               ? product.prices[0].amount
               : productPrice,
           productAmount: 1,
@@ -110,7 +106,7 @@ export default class ProductPage extends Component {
           id: product.id,
           gallery: product.gallery,
           productPrice:
-            index === 0 || index === null
+            selectedCurrencyIndex === 0 || !selectedCurrencyIndex
               ? product.prices[0].amount
               : productPrice,
           productAmount: 1,
@@ -121,10 +117,7 @@ export default class ProductPage extends Component {
     return (
       !product.length && (
         <Wrapper>
-          {product.gallery && (
-            <Img src={product.gallery[0]} productId={product.id} />
-          )}
-          <Gallery>
+          <Gallery productId={product.id}>
             {
               // Gallery
               product.gallery &&
@@ -137,6 +130,10 @@ export default class ProductPage extends Component {
                 })
             }
           </Gallery>
+          {product.gallery && (
+            <Img src={product.gallery[0]} productId={product.id} />
+          )}
+
           <Content productId={product.id}>
             <h1 className="brandName">{product.brand}</h1>
             <h3 className="productName">{product.name}</h3>

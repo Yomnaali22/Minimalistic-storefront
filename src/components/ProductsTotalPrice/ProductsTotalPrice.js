@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Context from "../../context/context";
+// Styles
 import { Content, Text, Button } from "../../pages/CartPage/CartPage.styles";
 export default class ProductsTotalPrice extends Component {
   static contextType = Context;
@@ -10,7 +11,7 @@ export default class ProductsTotalPrice extends Component {
     // Selected Currency
     const currencyIndex = localStorage.getItem("currency");
     // Selected Currency symbol
-    const symbol =
+    const currencySymbol =
       currencies[currencyIndex] && currencies[currencyIndex].symbol;
     // All selected Products
     const selectedProducts =
@@ -54,7 +55,7 @@ export default class ProductsTotalPrice extends Component {
           selectedProducts && selectedProducts.length ? (
             <div className="totalPrice">
               <span className="total">Total: </span>
-              <span>{`${symbol || "$"}${Math.round(totalPrice)}`}</span>
+              <span>{`${currencySymbol || "$"}${Math.round(totalPrice)}`}</span>
             </div>
           ) : null
         }
@@ -65,17 +66,14 @@ export default class ProductsTotalPrice extends Component {
         <Content>
           <Text>
             Tax 21%:
-            {` ${symbol || "$"}${Math.round(totalPrice / 21)}`}
+            {` ${currencySymbol || "$"}${Math.round(totalPrice / 21)}`}
           </Text>
           <Text>Quantity: {productsQuantity}</Text>
-          <Text>Total: {`${symbol || "$"}${Math.round(totalPrice)}`}</Text>
+          <Text>
+            Total: {`${currencySymbol || "$"}${Math.round(totalPrice)}`}
+          </Text>
           <Link to="/">
-            <Button
-              onClick={() => {
-                localStorage.removeItem("SelectedProducts");
-                localStorage.removeItem("SelectedAttributes");
-              }}
-            >
+            <Button onClick={() => localStorage.clear()}>
               <span>Order</span>
             </Button>
           </Link>
