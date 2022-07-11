@@ -7,7 +7,7 @@ query {
       id
       inStock
       gallery
-    
+      brand
       prices{
         currency{
           label

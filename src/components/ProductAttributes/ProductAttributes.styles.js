@@ -35,7 +35,7 @@ export const Swatch = styled.div`
     return (
       props.color.selectedAttribute &&
       props.color.type === "swatch" &&
-      "1px solid #5ECE7B;"
+      "2px solid #5ECE7B;"
     );
   }};
   color: ${(props) =>

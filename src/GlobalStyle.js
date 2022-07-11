@@ -9,6 +9,5 @@ export const GlobalStyle = createGlobalStyle`
     --linkSize: 16px;
     --fontStyle: normal;
     --primaryGreen: #5ECE7B;
-     width: 100%;
 }
 `;

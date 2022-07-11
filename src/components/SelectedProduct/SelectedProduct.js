@@ -11,7 +11,8 @@ export default class SelectedProduct extends Component {
   static contextType = Context;
   render() {
     const { categories, setSelectedProducts } = this.context;
-    const { selectedProduct, selectedProducts, className } = this.props;
+    const { selectedProduct, selectedProducts, name } = this.props;
+
     const product =
       categories &&
       categories.products.find(
@@ -58,8 +59,8 @@ export default class SelectedProduct extends Component {
     return (
       selectedProducts.length !== 0 && (
         <Wrapper>
-          <ProductWrapper className={className}>
-            {className === "cartPage" ? (
+          <ProductWrapper className={name}>
+            {name === "cartPage" ? (
               <ImageSlider
                 images={selectedProduct.gallery}
                 className="slider"
@@ -89,7 +90,7 @@ export default class SelectedProduct extends Component {
                 -
               </button>
             </div>
-            <Text className={className}>
+            <Text className={name}>
               <span className="brand">{selectedProduct.brand}</span>
               <span className="name">{selectedProduct.name}</span>
               <span className="price">
@@ -110,7 +111,7 @@ export default class SelectedProduct extends Component {
                               item={item}
                               product={product}
                               selectedProduct="selectedProduct"
-                              cartPage={className}
+                              cartPage={name}
                             />
                           );
                         })}

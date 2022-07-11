@@ -7,21 +7,17 @@ import { Wrapper, Content } from "./CategoryPage.styles";
 export default class CategoryPage extends Component {
   render() {
     const { name, products } = this.props.category;
-    const categoryName = name.charAt(0).toUpperCase() + name.slice(1);
     return (
       <>
-        {categoryName === "All" ? (
-          <Content>{`${categoryName} Categories`}</Content>
+        {name === "all" ? (
+          <Content>{`${name} Categories`}</Content>
         ) : (
-          <Content>{`${categoryName} Category`}</Content>
+          <Content>{`${name} Category`}</Content>
         )}
         <Wrapper>
-          {
-            // Render products
-            products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))
-          }
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </Wrapper>
       </>
     );

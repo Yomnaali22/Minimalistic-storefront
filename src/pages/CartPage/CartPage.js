@@ -10,6 +10,7 @@ export default class CartPage extends Component {
     const selectedProducts = JSON.parse(
       localStorage.getItem("SelectedProducts")
     );
+    console.log("carndlasjndljfnt");
     return (
       <Wrapper>
         <Headline>Cart</Headline>
@@ -20,7 +21,7 @@ export default class CartPage extends Component {
                 key={index}
                 selectedProduct={selectedProduct}
                 selectedProducts={selectedProducts}
-                className="cartPage"
+                name="cartPage"
               />
             );
           })}

@@ -1,29 +1,26 @@
 import React, { Component } from "react";
 // Styles
 import { Swatch, Text } from "./ProductAttributes.styles";
+import Context from "../../context/context";
 
 export default class ProductAttributes extends Component {
+  static contextType = Context;
   render() {
-    const {
-      product,
-      item,
-      setAttributes,
-      type,
-      attributeName,
-      selectedProduct,
-      cartPage,
-    } = this.props;
-
+    const { setAttributes } = this.context;
+    const { product, item, type, attributeName, selectedProduct, cartPage } =
+      this.props;
     // Selected attributes of all products
-    const productsSelectedAttributes = JSON.parse(
+    const selectedProductsAttributes = JSON.parse(
       localStorage.getItem("SelectedAttributes")
     );
+
     // Selected attribute of a single product
     const productAttribute =
-      productsSelectedAttributes &&
-      productsSelectedAttributes.find(
+      selectedProductsAttributes &&
+      selectedProductsAttributes.filter(
         (attribute) => attribute.id === product.id
       );
+
     const setSelectedAttributes = (item) => {
       // Initialize an empty array if no Object exist
       const productsSelectedAttributes = JSON.parse(
@@ -54,15 +51,22 @@ export default class ProductAttributes extends Component {
       }
       setAttributes(productsSelectedAttributes);
     };
-    const selectedAttribute = productAttribute
-      ? item.displayValue === productAttribute[attributeName] &&
-        product.id === productAttribute.id
-      : null;
+
+    const attribute =
+      productAttribute &&
+      productAttribute
+        .map((item1) => {
+          return productAttribute
+            ? item.displayValue === item1[attributeName] &&
+                product.id === item1.id
+            : null;
+        })
+        .some((element) => element && element);
 
     return (
       <Swatch
         color={{
-          selectedAttribute: selectedAttribute,
+          selectedAttribute: attribute,
           color: item.value,
           type: type,
           selectedProduct,

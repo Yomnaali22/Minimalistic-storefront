@@ -5,7 +5,7 @@ const handleColor = (props) =>
 
 export const Header = styled.div`
   position: absolute;
-  width: 91%;
+  width: 100%;
   height: 80px;
   .nav-link {
     text-decoration: none;

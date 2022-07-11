@@ -46,17 +46,6 @@ export default class Navigation extends Component {
     if (!localStorage.getItem("categoryIndex")) {
       localStorage.setItem("categoryIndex", 0);
     }
-
-    // Close the overlay or currencies on scroll
-    window.addEventListener("scroll", () => {
-      const { openOverlay, dropdown } = this.state;
-      if (openOverlay || dropdown) {
-        this.setOverlay(false);
-        this.setState({
-          dropdown: false,
-        });
-      }
-    });
   }
   render() {
     const { categoriesNames, dropdown, openOverlay } = this.state;

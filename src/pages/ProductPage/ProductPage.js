@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Interweave } from "interweave";
 import API from "./../../api";
 import Context from "./../../context/context";
+import { addProductsToCart } from "../../helpers";
 // Query
 import { productQuery } from "./../../Queries";
 // Styles
@@ -14,8 +15,6 @@ export default class ProductPage extends Component {
   static contextType = Context;
   state = {
     increaseProductQuantity: localStorage.getItem("amount"),
-    selectedAttributes:
-      [] || JSON.parse(localStorage.getItem("SelectedAttributes")),
   };
   // Get Product
   async componentDidMount() {
@@ -30,20 +29,11 @@ export default class ProductPage extends Component {
     }
   }
 
-  // Set product attributes in localStorage
-  setAttributes(attributes) {
-    this.setState({
-      SelectedAttributes: localStorage.setItem(
-        "SelectedAttributes",
-        JSON.stringify(attributes)
-      ),
-    });
-  }
-
   render() {
     const { product, setSelectedProducts } = this.props;
     // All currencies
-    const { currencies } = this.context;
+    const { currencies, setAttributes } = this.context;
+
     const prices = product.prices;
 
     const selectedCurrencyIndex = JSON.parse(localStorage.getItem("currency"));
@@ -57,50 +47,13 @@ export default class ProductPage extends Component {
           price.currency.label === currencies[selectedCurrencyIndex].label
       );
 
-    // Add Products to cart
-    const WantToBuyProducts = (product) => {
-      // Want to buy products
-      const selectedProducts = JSON.parse(
-        localStorage.getItem("SelectedProducts")
-      )
-        ? JSON.parse(localStorage.getItem("SelectedProducts"))
-        : [];
-      // Count the occurance of each product
-      const count = selectedProducts.reduce(
-        (initialValue, currentProduct) =>
-          currentProduct.id === product.id ? ++initialValue : initialValue,
-        0
-      );
-
-      // Want to buy products attributes
-      const selectedAttributes = JSON.parse(
-        localStorage.getItem("SelectedAttributes")
-      );
-      // Chech if the selected product has attributes
-      const productSelectedAttribute =
-        selectedAttributes &&
-        selectedAttributes.some((attribute) => attribute.id === product.id);
-
-      // Only Add products with Selected attributes to cart
-      if (
-        (!count && productSelectedAttribute) ||
-        product.attributes.length === 0
-      ) {
-        selectedProducts.push({
-          name: product.name,
-          brand: product.brand,
-          id: product.id,
-          gallery: product.gallery,
-          selectedAttributes: selectedAttributes && selectedAttributes,
-          productPrice:
-            selectedCurrencyIndex === 0 || !selectedCurrencyIndex
-              ? Math.round(product.prices[0].amount)
-              : Math.round(productPrice),
-          productAmount: 1,
-        });
-        setSelectedProducts(selectedProducts);
-      }
+    const props = {
+      setSelectedProducts,
+      setAttributes,
+      productPrice,
+      product,
     };
+
     return (
       !product.length && (
         <Wrapper>
@@ -137,7 +90,6 @@ export default class ProductPage extends Component {
                           type={attribute.type}
                           item={item}
                           product={product}
-                          setAttributes={this.setAttributes.bind(this)}
                         />
                       );
                     })}
@@ -147,9 +99,9 @@ export default class ProductPage extends Component {
             <p className="attributeName">Price: </p>
             <CurrencySwitcher product={product} />
             <button
-              onClick={() => {
-                // Put only available products in cart
-                product.inStock && WantToBuyProducts(product);
+              onClick={(e) => {
+                e.preventDefault();
+                product.inStock && addProductsToCart(props);
               }}
             >
               Add To Cart
