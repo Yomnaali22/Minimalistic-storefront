@@ -4,13 +4,13 @@ import { Wrapper, Headline } from "./CartPage.styles";
 // Components
 import SelectedProduct from "../../components/SelectedProduct/SelectedProduct";
 import ProductsTotalPrice from "../../components/ProductsTotalPrice/ProductsTotalPrice";
+
 export default class CartPage extends Component {
   render() {
     // Want to buy products
     const selectedProducts = JSON.parse(
       localStorage.getItem("SelectedProducts")
     );
-    console.log("carndlasjndljfnt");
     return (
       <Wrapper>
         <Headline>Cart</Headline>

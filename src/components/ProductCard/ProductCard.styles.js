@@ -10,6 +10,27 @@ export const Wrapper = styled.div`
   height: 500px;
   background: var(--primaryWhite);
   text-decoration: none;
+
+  .InCart {
+    padding: 5px;
+    border-radius: 10px;
+    position: absolute;
+    left: 25.42%;
+    right: 25.71%;
+    top: 55.24%;
+    bottom: 20.94%;
+    font-style: normal;
+    font-weight: 520;
+    font-size: 20px;
+    text-align: center;
+    height: 50px;
+    text-shadow: 1px 1px 10px #000000;
+    color: var(--primaryWhite);
+    letter-spacing: 0.4px;
+    font-family: "Raleway";
+    height: 30px;
+  }
+
   .inCartIcon {
     position: absolute;
     left: 70%;

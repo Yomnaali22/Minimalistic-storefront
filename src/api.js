@@ -1,5 +1,5 @@
 import axios from "axios";
-export const endpointURL = "http://localhost:4000/";
+const endpointURL = "http://localhost:4000/";
 
 export default {
   getData: async (query) => {

@@ -65,6 +65,7 @@ export const Content = styled.div`
     font-size: 30px;
     line-height: 27px;
   }
+
   p,
   .attributeName {
     font-family: "Roboto Condensed";
@@ -76,6 +77,7 @@ export const Content = styled.div`
   .attributeName {
     text-transform: uppercase;
   }
+
   button {
     background-color: #5ece7b;
     align-items: center;

@@ -20,8 +20,6 @@ export default class App extends Component {
     selectedCurrency: localStorage.getItem("currency") || 0,
     selectedProducts:
       JSON.parse(localStorage.getItem("SelectedProducts")) || [],
-    selectedAttributes:
-      [] || JSON.parse(localStorage.getItem("SelectedAttributes")),
   };
 
   // Fetch Data
@@ -66,17 +64,6 @@ export default class App extends Component {
         products,
     });
   }
-
-  // Set product attributes in localStorage
-  setAttributes(attributes) {
-    this.setState({
-      SelectedAttributes: localStorage.setItem(
-        "SelectedAttributes",
-        JSON.stringify(attributes)
-      ),
-    });
-  }
-
   render() {
     const { categories, currencies, product, selectedProducts } = this.state;
     return (
@@ -85,10 +72,9 @@ export default class App extends Component {
           value={{
             currencies: currencies,
             product: product,
-            selectedProducts: selectedProducts,
             categories: categories[0],
+            selectedProducts: selectedProducts,
             setSelectedProducts: this.setSelectedProducts.bind(this),
-            setAttributes: this.setAttributes.bind(this),
           }}
         >
           <Routes>

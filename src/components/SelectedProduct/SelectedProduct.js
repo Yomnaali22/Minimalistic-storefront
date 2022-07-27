@@ -10,8 +10,14 @@ import ImageSlider from "../ImageSlider/ImageSlider";
 export default class SelectedProduct extends Component {
   static contextType = Context;
   render() {
-    const { categories, setSelectedProducts } = this.context;
+    const { categories, setSelectedProducts, setAttributes } = this.context;
     const { selectedProduct, selectedProducts, name } = this.props;
+
+    const selectedAttributes = JSON.parse(
+      localStorage.getItem("SelectedAttributes")
+    )
+      ? JSON.parse(localStorage.getItem("SelectedAttributes"))
+      : [];
 
     const product =
       categories &&
@@ -48,14 +54,18 @@ export default class SelectedProduct extends Component {
             product.productAmount = productQuantity - 1;
           return product;
         });
-      // Update state of the selected products
-      setSelectedProducts(productAmount);
 
+      // Update state of the selected products
       const filteredArr = selectedProducts.filter((product) => {
         return product.productAmount !== 0;
       });
+
+      setSelectedProducts(productAmount);
       setSelectedProducts(filteredArr);
+      //setAttributes(atts);
+      //  console.log(filteredAtts);
     };
+
     return (
       selectedProducts.length !== 0 && (
         <Wrapper>
