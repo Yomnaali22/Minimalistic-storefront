@@ -20,6 +20,7 @@ export default class App extends Component {
     selectedCurrency: localStorage.getItem("currency") || 0,
     selectedProducts:
       JSON.parse(localStorage.getItem("SelectedProducts")) || [],
+    selectedAttributes: [] || JSON.parse(localStorage.getItem("attributes")),
   };
 
   // Fetch Data
@@ -64,17 +65,52 @@ export default class App extends Component {
         products,
     });
   }
+
+  // Set product attributes in localStorage
+  setAttributes(attributes) {
+    this.setState(
+      {
+        selectedAttributes: localStorage.setItem(
+          "attributes",
+          JSON.stringify(attributes)
+        ),
+      },
+      () => {
+        console.log("the atts", attributes);
+      }
+    );
+  }
+
+  countAtts = (product) => {
+    console.log(this.state.selectedAttributes);
+    return (
+      this.state.selectedAttributes &&
+      this.state.selectedAttributes.reduce(
+        (initialValue, currentProduct) =>
+          currentProduct.id === product.id ? ++initialValue : initialValue,
+        0
+      )
+    );
+  };
+
   render() {
-    const { categories, currencies, product, selectedProducts } = this.state;
+    const {
+      categories,
+      currencies,
+      product,
+      selectedProducts,
+      selectedAttributes,
+    } = this.state;
     return (
       <>
         <Context.Provider
           value={{
             currencies: currencies,
             product: product,
-            categories: categories[0],
             selectedProducts: selectedProducts,
+            categories: categories[0],
             setSelectedProducts: this.setSelectedProducts.bind(this),
+            setAttributes: this.setAttributes.bind(this),
           }}
         >
           <Routes>
@@ -88,7 +124,6 @@ export default class App extends Component {
               }
             >
               <Route path={"/cart"} element={<CartPage />} />
-
               <Route
                 path={`/${localStorage.getItem("id")}`}
                 element={
@@ -96,6 +131,8 @@ export default class App extends Component {
                     product={product}
                     setProduct={this.setProduct.bind(this)}
                     setSelectedProducts={this.setSelectedProducts.bind(this)}
+                    countAtts={this.countAtts.bind(this)}
+                    selectedAttributes={selectedAttributes}
                   />
                 }
               />

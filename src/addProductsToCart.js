@@ -1,16 +1,36 @@
-// Want to buy products
-const selectedProducts = JSON.parse(localStorage.getItem("SelectedProducts"))
-  ? JSON.parse(localStorage.getItem("SelectedProducts"))
-  : [];
-
 const selectedCurrencyIndex = JSON.parse(localStorage.getItem("currency"));
 
-export const countProduct = (product) => {
-  return selectedProducts.reduce(
-    (initialValue, currentProduct) =>
-      currentProduct.id === product.id ? ++initialValue : initialValue,
-    0
-  );
+export const countProduct = (product, selectedProducts) => {
+  const count =
+    selectedProducts &&
+    selectedProducts.reduce(
+      (initialValue, currentProduct) =>
+        currentProduct.id === product.id ? ++initialValue : initialValue,
+      0
+    );
+  return count;
+};
+
+const addProduct = (
+  product,
+  productPrice,
+  selectedProducts,
+  setSelectedProducts
+) => {
+  if (product.inStock && !countProduct(product, selectedProducts)) {
+    selectedProducts.push({
+      name: product.name,
+      brand: product.brand,
+      id: product.id,
+      gallery: product.gallery,
+      productPrice:
+        selectedCurrencyIndex === 0 || !selectedCurrencyIndex
+          ? Math.round(product.prices[0].amount)
+          : Math.round(productPrice),
+      productAmount: 1,
+    });
+    setSelectedProducts(selectedProducts);
+  }
 };
 
 const findProductPrice = (product, currencies) => {
@@ -25,38 +45,19 @@ const findProductPrice = (product, currencies) => {
   return productPrice;
 };
 
-const addProduct = (product, productPrice) => {
-  if (product.inStock) {
-    selectedProducts.push({
-      name: product.name,
-      brand: product.brand,
-      id: product.id,
-      gallery: product.gallery,
-      productPrice:
-        selectedCurrencyIndex === 0 || !selectedCurrencyIndex
-          ? Math.round(product.prices[0].amount)
-          : Math.round(productPrice),
-      productAmount: 1,
-      attributes: product.attributes.map((attribute) => {
-        return {
-          [attribute.name]: attribute.items[0].displayValue,
-          id: product.id,
-        };
-      }),
-    });
-  }
-};
-
 export const addProductsToCart = (
   product,
   setSelectedProducts,
-  setAttributes,
-  currencies
+  currencies,
+  selectedProducts
 ) => {
-  if (!countProduct(product)) {
-    addProduct(product, findProductPrice(currencies));
-    setSelectedProducts(selectedProducts);
-    //getProductAttributes(product);
-    // setAttributes(selectedAttributes);
+  if (!countProduct(product, selectedProducts)) {
+    findProductPrice(currencies);
+    addProduct(
+      product,
+      findProductPrice(product, currencies),
+      selectedProducts,
+      setSelectedProducts
+    );
   }
 };

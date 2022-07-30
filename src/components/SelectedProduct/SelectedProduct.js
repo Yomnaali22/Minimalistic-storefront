@@ -12,18 +12,13 @@ export default class SelectedProduct extends Component {
   render() {
     const { categories, setSelectedProducts, setAttributes } = this.context;
     const { selectedProduct, selectedProducts, name } = this.props;
-
-    const selectedAttributes = JSON.parse(
-      localStorage.getItem("SelectedAttributes")
-    )
-      ? JSON.parse(localStorage.getItem("SelectedAttributes"))
-      : [];
-
     const product =
       categories &&
       categories.products.find(
         (theProduct) => theProduct.id === selectedProduct.id
       );
+
+    console.log(product);
 
     // Find product quantity with the matching id
     const productQuantity =
@@ -47,6 +42,7 @@ export default class SelectedProduct extends Component {
 
     // Decrease the amount of product with the matching id
     const decreaseProductAmount = () => {
+      const attributes = JSON.parse(localStorage.getItem("attributes"));
       const productAmount =
         selectedProducts &&
         selectedProducts.map((product) => {
@@ -54,32 +50,26 @@ export default class SelectedProduct extends Component {
             product.productAmount = productQuantity - 1;
           return product;
         });
-
       // Update state of the selected products
-      const filteredArr = selectedProducts.filter((product) => {
+      const filteredProducts = selectedProducts.filter((product) => {
         return product.productAmount !== 0;
       });
-
+      const filteredAttributes = attributes.filter((thepro) => {
+        return filteredProducts.some((pro) => thepro.id === pro.id);
+      });
       setSelectedProducts(productAmount);
-      setSelectedProducts(filteredArr);
-      //setAttributes(atts);
-      //  console.log(filteredAtts);
+      setSelectedProducts(filteredProducts);
+      setAttributes(filteredAttributes);
     };
 
     return (
-      selectedProducts.length !== 0 && (
+      product && (
         <Wrapper>
           <ProductWrapper className={name}>
             {name === "cartPage" ? (
-              <ImageSlider
-                images={selectedProduct.gallery}
-                className="slider"
-              />
+              <ImageSlider images={product.gallery} className="slider" />
             ) : (
-              <img
-                src={selectedProduct.gallery[0]}
-                alt={selectedProducts.name}
-              />
+              <img src={product.gallery[0]} alt={product.name} />
             )}
             <div className="button">
               <button

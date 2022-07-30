@@ -28,68 +28,82 @@ export default class ProductPage extends Component {
       console.log("error", error);
     }
   }
+
   render() {
     const { product, setSelectedProducts } = this.props;
     // All currencies
-    const { currencies, setAttributes } = this.context;
-    const productGallery = product.gallery && product.gallery;
+    const { currencies, selectedProducts } = this.context;
+    const productGallery = product && product.gallery;
     const productAttributes = product.attributes && product.attributes;
+
+    const attributes = JSON.parse(localStorage.getItem("attributes"))
+      ? JSON.parse(localStorage.getItem("attributes"))
+      : [];
+    // check if product id exist in product att
+    // if false add selected product to cart
+    const checkProductAttribute = attributes.some(
+      (attribute) => attribute.id === product.id
+    );
+
     return (
-      <Wrapper>
-        <Gallery productId={product.id}>
-          {productGallery.map((photo) => {
-            return (
-              photo !== product.gallery[0] && <img src={photo} key={photo} />
-            );
-          })}
-        </Gallery>
-        {productGallery && (
-          <Img src={product.gallery[0]} productId={product.id} />
-        )}
-        <Content productId={product.id}>
-          <h1 className="brandName">{product.brand}</h1>
-          <h3 className="productName">{product.name}</h3>
-          {productAttributes.map((attribute, index, attributes) => {
-            return (
-              <React.Fragment key={attribute.id}>
-                <p className="attributeName">{attribute.name}:</p>
-                {attributes[index].items.map((item) => {
-                  return (
-                    <ProductAttributes
-                      key={item.id}
-                      attributeName={attribute.name}
-                      type={attribute.type}
-                      item={item}
-                      product={product}
-                    />
+      JSON.stringify(product) !== "{}" && (
+        <Wrapper>
+          <Gallery productId={product.id}>
+            {productGallery.map((photo) => {
+              return (
+                photo !== product.gallery[0] && <img src={photo} key={photo} />
+              );
+            })}
+          </Gallery>
+          {productGallery && (
+            <Img src={product.gallery[0]} productId={product.id} />
+          )}
+          <Content productId={product.id}>
+            <h1 className="brandName">{product.brand}</h1>
+            <h3 className="productName">{product.name}</h3>
+            {productAttributes.map((attribute, index, attributes) => {
+              return (
+                <React.Fragment key={attribute.id}>
+                  <p className="attributeName">{attribute.name}:</p>
+                  {attributes[index].items.map((item) => {
+                    return (
+                      <ProductAttributes
+                        key={item.id}
+                        attributeName={attribute.name}
+                        type={attribute.type}
+                        item={item}
+                        product={product}
+                      />
+                    );
+                  })}
+                </React.Fragment>
+              );
+            })}
+            <p className="attributeName">Price: </p>
+            <CurrencySwitcher product={product} />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (product.inStock && checkProductAttribute) {
+                  addProductsToCart(
+                    product,
+                    setSelectedProducts,
+                    currencies,
+                    selectedProducts
                   );
-                })}
-              </React.Fragment>
-            );
-          })}
-          <p className="attributeName">Price: </p>
-          <CurrencySwitcher product={product} />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              product.inStock &&
-                addProductsToCart(
-                  setSelectedProducts,
-                  setAttributes,
-                  product,
-                  currencies
-                );
-            }}
-          >
-            Add To Cart
-          </button>
-          <Interweave
-            content={product.description}
-            tagName="div"
-            className="description"
-          />
-        </Content>
-      </Wrapper>
+                }
+              }}
+            >
+              Add To Cart
+            </button>
+            <Interweave
+              content={product.description}
+              tagName="div"
+              className="description"
+            />
+          </Content>
+        </Wrapper>
+      )
     );
   }
 }
