@@ -15,8 +15,6 @@
 
 To run this project:
 
-1- Clone and run endpoint: https://github.com/scandiweb/junior-react-endpoint
-
 2- npm i
 
 3- npm start
